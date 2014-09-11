@@ -1,6 +1,7 @@
 Project Overview
 
 Software Management:
+
     Project Management tool that gives a client a window into the
     development process.
 
@@ -11,21 +12,23 @@ Software Management:
 
     Features:
 
-        Custom User Authentication 
+        Custom User Authentication
             - Logging In
             - Registration
 
         Object modelling
             - Users
 
-        Front End Design [Profile View, Project View, Ticket View]
-            
-         
-
-        Additional Features
-            
+        Front End Design 
+            - Profile View 
+            - Project View
+            - Ticket View
 
 
-Tools -
-    Python 2.7
-    Django 1.7
+    Additional Features:
+        - Javascript interactivity
+        - 
+
+    Tools:
+        - Python 2.7
+        - Django 1.7
