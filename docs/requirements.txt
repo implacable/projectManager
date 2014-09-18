@@ -19,15 +19,18 @@ Software Management:
         Object modelling
             - Users
 
-        Front End Design 
-            - Profile View 
+        Front End Design
+            - Profile View
             - Project View
             - Ticket View
 
+        Back End
+            - Registration Form
+            - 
 
     Additional Features:
         - Javascript interactivity
-        - 
+        -
 
     Tools:
         - Python 2.7
