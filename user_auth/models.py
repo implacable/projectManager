@@ -56,6 +56,7 @@ class MyUser(AbstractBaseUser):
     objects = MyUserManager()
 
     USERNAME_FIELD = 'email'
+
     REQUIRED_FIELDS = []
 
     def get_full_name(self):
