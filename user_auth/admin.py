@@ -14,6 +14,8 @@ class UserCreationForm(forms.ModelForm):
         model = MyUser
         fields = ('email',)
 
+        
+
     def clean_password2(self):
         # Check that the two password entries match
         password1 = self.cleaned_data.get("password1")
@@ -32,14 +34,14 @@ class UserCreationForm(forms.ModelForm):
 
 
 class UserChangeForm(forms.ModelForm):
-    password = ReadOnlyPasswordHashField()
+    password = ReadOnlyPasswordHashField(label=("Password")),
 
     class Meta:
         model = MyUser
         fields = ('email', 'password', 'is_active', 'is_admin')
 
     def clean_password(self):
-        return self.intial["password"]
+        return self.initial["password"]
 
 
 class MyUserAdmin(UserAdmin):
