@@ -54,10 +54,11 @@
 .login {
     background-color: #01DDC7;
     min-height: 100px;
+    max-width: 215px;
     padding: 10px;
     margin-top: 15px;
     border-radius: 10px;
-    position: fixed;
+    position: relative;
     left: 35%;
 }
 
