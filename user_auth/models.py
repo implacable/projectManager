@@ -14,6 +14,7 @@ class MyUserManager(BaseUserManager):
         user = self.model(
             email=self.normalize_email(email),
             password=password,
+            
         )
 
         user.set_password(password)
@@ -56,6 +57,7 @@ class MyUser(AbstractBaseUser):
     objects = MyUserManager()
 
     USERNAME_FIELD = 'email'
+
     REQUIRED_FIELDS = []
 
     def get_full_name(self):
