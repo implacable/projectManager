@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = (
     'user_auth',
+    'project_ticket',
     'django_extensions',
     'django.contrib.admin',
     'django.contrib.auth',
