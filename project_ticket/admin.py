@@ -11,7 +11,7 @@ class TicketInline(admin.TabularInline):
 class ProjectAdmin(admin.ModelAdmin):
 	fieldsets = [
 	         ('None',                {'fields': ['project_name']}),
-	         ('Project Description', {'fields': ['description_of_project'], 'classes': ['collapse']}),
+	         ('Project Description', {'fields': ['description'], 'classes': ['collapse']}),
 	         ('Client',              {'fields': ['client']}),
 	         ('Project Manager',     {'fields': ['project_manager']}),
 	         ('Project Due',         {'fields': ['project_due']}),
