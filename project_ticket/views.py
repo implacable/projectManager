@@ -1,9 +1,10 @@
 from django.shortcuts import render
-from user_auth.forms import LogIn
+from user_auth.forms import LogIn, CreateUser
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from user_auth.models import MyUser
 
 def login_view(request):
     if request.user.is_authenticated():
@@ -33,3 +34,27 @@ def home(request):
 @login_required(login_url='login')
 def profile(request):
     return render(request, 'project_ticket/profile.html', {'user': request.user})
+
+def register(request):
+    if request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('profile'))
+
+    if request.method == 'GET':
+        form = CreateUser()
+    else:
+        form = CreateUser(request.POST)
+        if form.is_valid():
+            user = MyUser()
+            user.email = form.cleaned_data['email']
+            user.first_name = form.cleaned_data['first_name']
+            user.last_name = form.cleaned_data['last_name']
+            if form.cleaned_data['password1'] == form.cleaned_data['password2']:
+                user.set_password(form.cleaned_data['password1'])
+                user.save()
+                user = authenticate(username=form.cleaned_data['email'],
+                                password=form.cleaned_data['password1'])
+                login(request, user)
+                return HttpResponseRedirect(reverse('profile'))
+
+ 
+    return render(request, 'project_ticket/register.html', { 'form':form, 'user': request.user })
