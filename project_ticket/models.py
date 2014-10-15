@@ -5,7 +5,8 @@ from datetime import datetime
 
 class Project(models.Model):
 	client = models.OneToOneField(MyUser, related_name = 'client')
-	project_manager = models.ManyToManyField(MyUser, related_name = 'project_manager')
+	developer = models.ManyToManyField(MyUser, related_name='assigned_developers')
+	project_manager = models.OneToOneField(MyUser, related_name = 'project_manager')
 	project_name = models.CharField(max_length=32)
 	description = models.TextField(max_length=256, default="")
 	project_due = models.DateField(blank=True, null=True)

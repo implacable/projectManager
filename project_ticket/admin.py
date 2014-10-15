@@ -14,6 +14,7 @@ class ProjectAdmin(admin.ModelAdmin):
 	         ('Project Description', {'fields': ['description'], 'classes': ['collapse']}),
 	         ('Client',              {'fields': ['client']}),
 	         ('Project Manager',     {'fields': ['project_manager']}),
+	         ('Developers',     	 {'fields': ['developer']}),
 	         ('Project Due',         {'fields': ['project_due']}),
 	     ]
 	inlines = [TicketInline]
