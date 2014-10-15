@@ -1,0 +1,50 @@
+.banner {
+	height: 320px;
+	background: linear-gradient(135deg, #0096BE 0%, #46E3D3 81%);
+	width: 100%;
+	padding: 0px;
+	margin: 0px;
+}
+
+#logo h1 {
+	color: white;
+	font-weight: 100;
+	font-size: 80px;
+	font-family: roboto;
+	padding-left: 20px;
+	padding-top: 20px;
+	margin-top: 0px;
+}
+
+.wrapper {
+	padding-top: 75px;
+	margin-top: 50px;
+	width: 90%;
+    max-width: 960px;
+    margin: 0 auto;
+    display: block;
+    position: relative;
+}
+
+.content {
+	padding: 10px;	
+}
+
+.content h2 {
+	margin: 0 auto;
+	text-align: center;
+	font-style: italic;
+}
+
+.buttons {
+	padding: 25px;
+	display: block;
+	width: 25%;
+    margin: 0 auto;
+}
+
+.buttons a {
+	padding: 1px;
+	display: inline;
+    margin: 0 auto;
+}

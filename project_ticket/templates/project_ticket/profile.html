@@ -1,0 +1,15 @@
+{% extends 'project_ticket/base.html' %}
+{% block 'content' %}
+	<h1> Welcome to the profile page </h1>
+	<h3> {{ user.email }} </h3>
+
+	<h3> My Projects: </h3>
+	{% for project in projects %}
+		<a href="{% url 'project_detail' project.id %}"> <h3> {{ project.project_name }} </h3> </a>
+	{% endfor%}
+
+	<h3> Assigned Tickets: </h3>
+	{% for ticket in tickets %}
+		<h3> {{ ticket.name }} <h3>
+	{% endfor %}
+{% endblock %}
