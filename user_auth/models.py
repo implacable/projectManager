@@ -45,14 +45,20 @@ class MyUser(AbstractBaseUser):
     last_name = models.CharField(max_length=32)
     email = models.EmailField(max_length=256, unique=True)
     date_joined = models.DateField(auto_now_add=True)
+    
+    # django.contrib.auth required fields
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
-    #data memembers for permissions within the whole project
-    is_client = models.BooleanField(default=False)
-    is_project_manager = models.BooleanField(default=False)
-    is_developer = models.BooleanField(default=False)
+    
+    # Data memembers for permissions within the whole project
+    perms = (
+        ('client', 'Client'),
+        ('developer', 'Developer'),
+        ('project_manager', 'Project Manager'),
+    )
+    perm = models.CharField(max_length=32, choices=perms, blank=True, null=True)
 
     objects = MyUserManager()
 

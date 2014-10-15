@@ -10,6 +10,9 @@ class Project(models.Model):
 	description = models.TextField(max_length=256, default="")
 	project_due = models.DateField(blank=True, null=True)
 
+	def __unicode__(self):
+		return self.project_name
+
 
 class Ticket(models.Model):
 	developer = models.ManyToManyField(MyUser, related_name = 'developer')
@@ -18,3 +21,14 @@ class Ticket(models.Model):
 	description_ticket = models.TextField(max_length = 1024, default="")
 	date_completed = models.DateTimeField(blank = True, null = True)
 	date_created = models.DateTimeField(default = datetime.now)
+
+	# Set of choices for tickets
+	# Back logged tickets are kept for records
+	ticket_statuss = (
+		('queued', 'Queued'),
+		('in_progress', 'In Progress'),
+		('testing', 'Testing'),
+		('completed', 'Completed'),
+		('back_log', 'Back Log'),
+	)
+	status = models.CharField(max_length=32, blank=True, null=True, choices=ticket_statuss)
