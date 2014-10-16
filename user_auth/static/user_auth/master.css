@@ -1,5 +1,5 @@
 .full_nav {
-	background-color: #01C0EA;
+	background-color: #01DDC7;
 	display: block;
 	width: 100%;
     position:relative;
@@ -42,7 +42,7 @@
 }
 
 .footer {
-	background-color: #01C0EA;
+	background-color: #01DDC7;
 	display: block;
     height:60px;
     width:100%;
@@ -52,8 +52,7 @@
 }
 
 .login {
-    background-color: #01C0EA;
-    border: 1px groove grey;
+    background-color: #01DDC7;
     min-height: 100px;
     max-width: 215px;
     padding: 10px;
