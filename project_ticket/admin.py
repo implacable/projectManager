@@ -10,10 +10,11 @@ class TicketInline(admin.TabularInline):
 
 class ProjectAdmin(admin.ModelAdmin):
 	fieldsets = [
-	         ('None',                {'fields': ['project_name']}),
+	         ('None',                {'fields': ['name']}),
 	         ('Project Description', {'fields': ['description'], 'classes': ['collapse']}),
 	         ('Client',              {'fields': ['client']}),
 	         ('Project Manager',     {'fields': ['project_manager']}),
+	         ('Developers',              {'fields': ['developer']}),
 	         ('Project Due',         {'fields': ['project_due']}),
 	     ]
 	inlines = [TicketInline]
