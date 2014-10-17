@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from user_auth import views
+from project_ticket import views
 
 urlpatterns = patterns('',
 	url(r'^home$', views.home, name='home'),
