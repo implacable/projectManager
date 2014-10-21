@@ -1,5 +1,5 @@
-.full_nav {
-	background-color: #01DDC7;
+.full_nav { 
+	background-color: #0296db;
 	display: block;
 	width: 100%;
     position:relative;
@@ -30,7 +30,6 @@
 
 .navbar a:hover {
 	text-decoration: none;
-	color: #00FEA6;
 }
 
 .wrapper {
@@ -42,7 +41,7 @@
 }
 
 .footer {
-	background-color: #01DDC7;
+	background-color: #0296db;
 	display: block;
     height:60px;
     width:100%;
@@ -52,7 +51,7 @@
 }
 
 .login {
-    background-color: #01DDC7;
+    background-color: #0296db;
     min-height: 100px;
     max-width: 215px;
     padding: 10px;
