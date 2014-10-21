@@ -8,7 +8,7 @@ from django.core.urlresolvers import reverse
 
 def login_view(request):
     if request.user.is_authenticated():
-        return HttpResponseRedirect(reverse('home'))
+        return HttpResponseRedirect(reverse('profile'))
 
     if request.method == 'GET':
         form = LogIn()
@@ -29,7 +29,7 @@ def logout_view(request):
     return HttpResponseRedirect(reverse('home'))
 
 def home(request):
-	return render(request, 'project_ticket/index.html', {'user': request.user})
+	return render(request, 'project_ticket/landing.html', {'user': request.user})
 
 @login_required(login_url='login')
 def profile(request):
