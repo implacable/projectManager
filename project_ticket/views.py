@@ -57,6 +57,7 @@ def editprofile(request):
                             'email' : user.email,
                             }
                     )
+
     return render(request, 'project_ticket/editprofile.html', {'form':form, 'user': request.user})
 
 
@@ -67,7 +68,6 @@ def changepassword(request):
         form = EditPassword(request.POST)
         if form.is_valid():
             if form.cleaned_data['new_password'] == form.cleaned_data['confirm_password']:
-                user.set_password(form.cleaned_data['new_password'])
                 user.save()
 
     else:

@@ -9,4 +9,4 @@ class EditInfo(forms.Form):
 
 class EditPassword(forms.Form):
 	new_password = forms.CharField(widget=forms.PasswordInput(), label = "New Password")
-	confirm_password = forms.CharField(widget=forms.PasswordInput(), label = "Confirm Password")
+	confirm_password = forms.CharField(widget=forms.PasswordInput(), label = "Confirm New Password")

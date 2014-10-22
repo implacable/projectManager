@@ -10,11 +10,12 @@
 	                {% csrf_token %}
 	                <table>
 	                	{{ form.as_table }}
-	                	<th><label> <a href="{% url 'changepassword' %}"><p style="text-align:center">Change Password</p></a> </label></th>
 	                </table>
+
                 <input type="submit" value="Save" >
 				<input class="reset" type="button" value="Cancel" 
 						onclick="window.location.replace('{% url 'profile' %}')">
+				<p><th><label> <a href="{% url 'changepassword' %}"><p style="text-align:right">Change Password</p></a> </label></th></p>
             </form>
 			</div>
 		</div>
