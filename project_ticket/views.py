@@ -67,8 +67,12 @@ def changepassword(request):
     if request.method == 'POST':
         form = EditPassword(request.POST)
         if form.is_valid():
-            if form.cleaned_data['new_password'] == form.cleaned_data['confirm_password']:
-                user.save()
+            if user.check_password(form.cleaned_data['old_password']):
+                if form.cleaned_data['new_password'] == form.cleaned_data['confirm_password']:
+                    user.set_password(form.cleaned_data['new_password'])
+                    user.save()
+            else:
+                return HttpResponse("Error! Wrong password")
 
     else:
         form = EditPassword()
