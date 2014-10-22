@@ -1,0 +1,23 @@
+{% extends 'project_ticket/base.html' %}
+{% block 'content' %}
+	<h1> Edit Profile Page </h1>
+	<h3> Hello, {{ user.first_name }} {{ user.last_name }}</h3>
+	<h3> Email: {{ user.email }} </h3>
+	<div class="row">
+		<div class="col-md-5">
+			<div class="well"> 
+				<form action='{{ request.path }}' method="POST" enctype="multipart/form-data">
+	                {% csrf_token %}
+	                <table>
+	                	{{ form.as_table }}
+	                	<th><label> <a href="{% url 'changepassword' %}"><p style="text-align:center">Change Password</p></a> </label></th>
+	                </table>
+                <input type="submit" value="Save" >
+				<input class="reset" type="button" value="Cancel" 
+						onclick="window.location.replace('{% url 'profile' %}')">
+            </form>
+			</div>
+		</div>
+		</div>
+	</div>
+{% endblock %}

@@ -2,4 +2,5 @@
 {% block 'content' %}
 	<h1> Welcome to the profile page </h1>
 	<h3> Hello, {{ user.email }} </h3>
+	<a href="{% url 'editprofile' %}">Edit Profile</a>
 {% endblock %}

@@ -43,6 +43,8 @@ class MyUserManager(BaseUserManager):
 class MyUser(AbstractBaseUser):
     first_name = models.CharField(max_length=32)
     last_name = models.CharField(max_length=32)
+    address = models.CharField(max_length = 32, default = "", null = True)
+    contact = models.CharField(max_length = 10, default = "")
     email = models.EmailField(max_length=256, unique=True)
     date_joined = models.DateField(auto_now_add=True)
     
