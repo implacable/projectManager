@@ -33,3 +33,16 @@ class Ticket(models.Model):
 		('back_log', 'Back Log'),
 	)
 	status = models.CharField(max_length=32, blank=True, null=True, choices=ticket_statuss)
+
+    # Insert Comment Class here!
+class Comment(models.Model):
+    ticket = models.ForeignKey(Ticket)
+    text = models.TextField(max_length = 1024)
+    date_submitted = models.DateTimeField(default = datetime.now)
+    user = models.CharField(max_length = 120)
+
+    # create save override function
+
+    # def save(self):
+        # self.user = request.user.full_name()
+        # super(Comment, self).save()
