@@ -34,7 +34,7 @@ class Ticket(models.Model):
 	)
 	status = models.CharField(max_length=32, blank=True, null=True, choices=ticket_statuss)
 
-    # Insert Comment Class here!
+# Insert Comment Class here!
 class Comment(models.Model):
     ticket = models.ForeignKey(Ticket)
     text = models.TextField(max_length = 1024)
