@@ -32,4 +32,11 @@ class Ticket(models.Model):
 		('completed', 'Completed'),
 		('back_log', 'Back Log'),
 	)
-	status = models.CharField(max_length=32, blank=True, null=True, choices=ticket_statuss)
+        status = models.CharField(max_length=32, blank=True, null=True, choices=ticket_statuss)
+
+class ActionReport(models.Model):
+    date_created = models.DateTimeField(default=datetime.now)
+    activity_feed = models.ForeignKey(ActivityFeed)
+
+class ActivityFeed(models.Model):
+    project = models.OneToOne(Project, related_name='project')
