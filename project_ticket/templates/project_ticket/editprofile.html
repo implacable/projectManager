@@ -10,13 +10,20 @@
 	                {% csrf_token %}
 	                <table>
 	                	{{ form.as_table }}
+	                	{{ form2.as_table }}
 	                </table>
 	            <p><p align="center">
-                <input type="submit" value="Save" >
+                <input type="submit" value="Save" onclick="window.location.replace('{% url 'editprofile' %}')">
 				<input class="reset" type="button" value="Cancel" 
 						onclick="window.location.replace('{% url 'profile' %}')">
 				</p></p>
-				<p><p align = "right"><button type="button" onclick="window.location.replace('{% url 'changepassword' %}')">Change Password </button></p></p>
+				{% if form2.new_password.value != form2.confirm_password.value %}
+					<div class="alert alert-danger">Error! Password did not match.</div>
+				{% elif form2.new_password.data %}
+					<div class="alert alert-success">Save! Profile updated.</div>
+				{% elif form.firstname.data %}
+					<div class="alert alert-success">Save! Profile updated.</div>
+				{% endif %}
             </form>
 			</div>
 		</div>

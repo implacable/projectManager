@@ -44,11 +44,21 @@ def editprofile(request):
     user = request.user
     if request.method == 'POST':
         form = EditInfo(request.POST)
-        if form.is_valid():
-            user.first_name = form.cleaned_data['firstname']
-            user.last_name = form.cleaned_data['lastname']
-            user.email = form.cleaned_data['email']
-            user.save()
+        form2 = EditPassword(request.POST, empty_permitted=True)
+        if form.is_valid() and form2.is_valid() and form2.has_changed():
+            if user.check_password(form2.cleaned_data['old_password']):
+                if form2.cleaned_data['new_password'] == form2.cleaned_data['confirm_password']:
+                    user.first_name = form.cleaned_data['firstname']
+                    user.last_name = form.cleaned_data['lastname']
+                    user.email = form.cleaned_data['email']
+                    user.set_password(form2.cleaned_data['new_password'])
+                    user.save()
+
+        elif form.is_valid() and not(form2.has_changed()):
+                user.first_name = form.cleaned_data['firstname']
+                user.last_name = form.cleaned_data['lastname']
+                user.email = form.cleaned_data['email']
+                user.save()
 
     else:
         form = EditInfo(
@@ -57,27 +67,10 @@ def editprofile(request):
                             'email' : user.email,
                             }
                     )
+        form2 = EditPassword()
 
-    return render(request, 'project_ticket/editprofile.html', {'form':form, 'user': request.user})
+    return render(request, 'project_ticket/editprofile.html', {'form':form, 'form2':form2, 'user': request.user})
 
-
-@login_required(login_url='login')
-def changepassword(request):
-    user = request.user
-    if request.method == 'POST':
-        form = EditPassword(request.POST)
-        if form.is_valid():
-            if user.check_password(form.cleaned_data['old_password']):
-                if form.cleaned_data['new_password'] == form.cleaned_data['confirm_password']:
-                    user.set_password(form.cleaned_data['new_password'])
-                    user.save()
-            else:
-                return HttpResponse("Error! Wrong password")
-
-    else:
-        form = EditPassword()
-
-    return render(request, 'project_ticket/changepassword.html', {'form':form, 'user': request.user})
 
 
 def register(request):
