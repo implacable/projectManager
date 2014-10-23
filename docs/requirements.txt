@@ -1,34 +1,43 @@
-Project Overview
+# Project Manager
 
-Software Management:
-
-    Project Management tool that gives a client a window into the
-    development process.
-
-    Current project:
-        - Queued Tickets, In Progress, Completed, Live
-
-    ORM: User [PM, DEV, CLIENT] -> Project -> Ticket
-
-    Features:
-
-        Custom User Authentication
-            - Logging In
-            - Registration
-
-        Object modelling
-            - Users
-
-        Front End Design 
-            - Profile View 
-            - Project View
-            - Ticket View
+### Overview
 
 
-    Additional Features:
-        - Javascript interactivity
-        - 
+Project Management tool that gives a client a window into the development process.
 
-    Tools:
-        - Python 2.7
-        - Django 1.7
+
+Current project:
+
+- Queued Tickets, In Progress, Completed, Live
+
+ORM: User [PM, DEV, CLIENT] -> Project -> Ticket
+
+Features:
+
+Custom User Authentication
+
+- Logging In
+- Registration
+
+Object modelling
+
+- Users
+
+Front End Design
+
+* Profile View
+* Project View
+* Ticket View
+
+Back End
+
+- Registration Form 
+
+Additional Features
+
+- Javascript interactivity
+
+Tools:
+
+- Python 2.7
+- Django 1.7

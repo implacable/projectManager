@@ -1,0 +1,35 @@
+<html>
+	<head>
+		{% load staticfiles %}
+		<link rel="stylesheet" type="text/css" href="{% static 'project_ticket/master.css' %}" />
+		<link rel="stylesheet" type="text/css" href="{% static 'project_ticket/bootstrap.min.css' %}" />
+		{% block 'styling' %}
+
+		{% endblock %}
+	</head>
+	<body>
+		<div class="full_nav">
+			{% if user.is_authenticated %}
+			<ul class="navbar">
+				<li><a href="{% url 'logout' %}"> Logout </a>
+				<li><a href=""> My Projects </a></li>
+				<li><a href="{% url 'profile' %}"> Profile </a></li>
+				<li><a href="{% url 'home' %}"> Home </a></li>
+			</ul>
+			{% else %}
+			<ul class="navbar">
+				<li><a href="{% url 'login' %}"> Login </a></li>
+				<li><a href="{% url 'register' %}"> Register </a></li>
+				<li><a href="{% url 'home' %}"> Home </a></li>
+			</ul>
+			{% endif %}
+		</div>
+		<div class="wrapper">
+			{% block 'content' %}
+
+			{% endblock %}
+		</div>
+		<div class="footer">
+		</div>
+	</body>
+</html>
