@@ -2,21 +2,26 @@
 
 {% block 'content' %}
     <div class="row">
-        <div class="col-md-3 login">
+        <div class="col-md-4 col-xs-4"></div>
+        <div class="col-md-4 col-xs-4 login">
             <form action="{{ request.path }}" method="POST">
                 {% csrf_token %}
+                
                 <div class="fieldWrapper">
-                <p>{{ form.email.errors }}<p/>
-                <p><label for="email">Email address:</label></p>
-                <p> {{ form.email }} </p>
+                    <p>{{ form.email.errors }}<p/>
+                    <p><label for="email">Email address:</label></p>
+                    <p> {{ form.email }} </p>
                 </div>
+
                 <div class="fieldWrapper">
-                <p>{{ form.password.errors }}</p>
-                <p><label for="password">Password:</label></p>
-                <p>{{ form.password }}<p/>
+                    <p>{{ form.password.errors }}</p>
+                    <p><label for="password">Password:</label></p>
+                    <p>{{ form.password }}<p/>
                 </div>
+                
                 <p><input type="submit" value="Submit"></p>
             </form>
         </div>
+        <div class="col-md-4 col-xs-4"></div>
     </div>
 {% endblock %}

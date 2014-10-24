@@ -8,9 +8,9 @@
 	color: white;
 	font-weight: 100px;
 	font-size: 60px;
-	font-family: roboto;
+	font-family: 'Roboto', sans-serif;
 	margin-top: 0px;
-	padding-top: 20px;
+	padding-top: 15px;
 	padding-left: 20px;
 }
 
@@ -23,7 +23,7 @@
 }
 
 .tag_line h2 {
-	padding-top: 50px;
+	padding-top: 25px;
 	font-weight: 30px;
 	font-style: italic;
 	text-align: center;
@@ -50,4 +50,16 @@
 
 .content {
 	text-align: justify;
+}
+
+.content p {
+	font-family: garamond;
+	font-size: 16px;
+}
+
+.section_line {
+	background: #01DDC7;
+	margin-top: 30px;
+	height: 1px;
+	width: 100%;
 }
