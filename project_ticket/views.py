@@ -48,6 +48,24 @@ def profile(request):
 
     return render(request, 'project_ticket/profile.html', {'user': user, 'projects': user_projects })
 
+@login_required(login_url='login')
+def project(request, project_id):
+    user = request.user
+    project = Project.objects.get(pk=project_id)
+
+    # Users should not be able to view projects they are not related too
+    if user.perm == "developer":
+        pass
+    elif user.perm == "client":
+        pass
+    elif user.perm == "project_manager":
+        pass
+    else:
+        pass
+
+    return render(request, 'project_ticket/project.html', {'project':project})
+
+
 def register(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect(reverse('profile'))

@@ -35,7 +35,7 @@
 						<h3> My Projects: </h3>
 						<ol>
 						{% for project in projects %}
-							<li><h3><a href> {{ project.name }} </a></h3></li>
+							<li><h3><a href="{% url 'project' project.id %}"> {{ project.name }} </a></h3></li>
 						{% endfor %}
 						</ol>
 					</div>
