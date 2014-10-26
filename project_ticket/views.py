@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from user_auth.forms import LogIn, CreateUser
 from user_auth.models import MyUser
+from project_ticket.models import Project
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
@@ -33,7 +34,19 @@ def home(request):
 
 @login_required(login_url='login')
 def profile(request):
-    return render(request, 'project_ticket/profile.html', {'user': request.user})
+    user = request.user
+
+    # This logic returns the correct query set based on the user type
+    if user.perm == "developer":
+        user_projects = Project.objects.filter(developer=user)
+    elif user.perm == "client":
+        user_projects = Project.objects.filter(client=user)
+    elif user.perm == "project_manager":
+        user_projects = Project.objects.filter(project_manager=user)
+    else:
+        user_projects = []
+
+    return render(request, 'project_ticket/profile.html', {'user': user, 'projects': user_projects })
 
 def register(request):
     if request.user.is_authenticated():

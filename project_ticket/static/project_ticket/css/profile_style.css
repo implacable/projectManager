@@ -1,0 +1,29 @@
+.account_info {
+	border-radius: 10px;
+	background-color: #0296db;
+	min-height: 630px;
+}
+
+.my_projects {
+	border-radius: 10px;
+	background-color: #0296db;
+	min-height: 300px;
+}
+
+.activity_feeds {
+	border-radius: 10px;
+	background-color: #0296db;
+	min-height: 300px;
+}
+
+.my_projects a {
+	color: black;
+}
+
+hr {
+	width: 90%;
+	padding: 10px;
+	margin: 0 auto;
+}
+
+/* This page needs to be styled much further */
