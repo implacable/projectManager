@@ -43,6 +43,6 @@ class Comment(models.Model):
 
     # create save override function
 
-    # def save(self):
-        # self.user = request.user.full_name()
-        # super(Comment, self).save()
+    def save(self):
+        self.user = request.user.full_name()
+        super(Comment, self).save()
