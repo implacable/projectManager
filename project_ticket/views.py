@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from user_auth.forms import LogIn, CreateUser
 from user_auth.models import MyUser
 from project_ticket.models import Project
@@ -6,8 +5,15 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.shortcuts import render, get_object_or_404
 
 def login_view(request):
+    """
+    If the request method is post then the user 
+    will be authenticated and if authenticated
+    correctly they will be redirected to the 
+    profile page.
+    """
     if request.user.is_authenticated():
         return HttpResponseRedirect(reverse('profile'))
 
@@ -26,17 +32,34 @@ def login_view(request):
 
 @login_required(login_url='login')
 def logout_view(request):
+    """
+    The tag above is an attribute tag that states 
+    that a user must be logged into accesss this URL.
+    A user must obviously be logged in to log out.
+    Utlizing the Django logout function and then
+    redirecting afterwards the users will be
+    redirected to the home page.
+    """
     logout(request)
     return HttpResponseRedirect(reverse('home'))
 
 def home(request):
+    """
+    The landing page is static content 
+    that is rendered here using Django.
+    """
 	return render(request, 'project_ticket/landing.html', {'user': request.user})
 
 @login_required(login_url='login')
 def profile(request):
+    """
+    Each user will need different query sets based
+    on the type of user they are. So based on the 
+    user types we run a query which will get all
+    projects that they are related to.
+    """
     user = request.user
 
-    # This logic returns the correct query set based on the user type
     if user.perm == "developer":
         user_projects = Project.objects.filter(developer=user)
     elif user.perm == "client":
@@ -50,8 +73,15 @@ def profile(request):
 
 @login_required(login_url='login')
 def project(request, project_id):
+    """
+    This view is passed in a project_id from the URL
+    using a regular expression that matches any number.
+    This number is extracted and used to match a project.
+    Although the user needs to be related in some way to 
+    the project in the ORM to actually be allowed to view it.
+    """
     user = request.user
-    project = Project.objects.get(pk=project_id)
+    project = get_object_or_404(Project, id=project_id)
 
     is_related_dev = False
     is_related_pm = False
@@ -81,6 +111,12 @@ def project(request, project_id):
 
 
 def register(request):
+    """
+    If the request method is post then a MyUser object 
+    will be created with a the desired info from the 
+    HTML forms. The user will then authenticate and
+    be redirected to the profile page.
+    """
     if request.user.is_authenticated():
         return HttpResponseRedirect(reverse('profile'))
 
