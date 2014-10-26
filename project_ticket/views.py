@@ -53,15 +53,29 @@ def project(request, project_id):
     user = request.user
     project = Project.objects.get(pk=project_id)
 
+    is_related_dev = False
+    is_related_pm = False
     # Users should not be able to view projects they are not related too
     if user.perm == "developer":
-        pass
+        for dev in project.developer.all():
+            if user.email == dev.email:
+                is_related_dev = True
+        if is_related_dev == False:
+          return HttpResponseRedirect(reverse('profile'))  
+
     elif user.perm == "client":
-        pass
+        if project.client != user:
+            return HttpResponseRedirect(reverse('profile'))
+
     elif user.perm == "project_manager":
-        pass
+        for proj_man in project.project_manager.all():
+            if user.email == proj_man.email:
+                is_related_pm = True
+        if is_related_pm == False:
+            return HttpResponseRedirect(reverse('profile'))
+    
     else:
-        pass
+        return HttpResponseRedirect(reverse('profile'))
 
     return render(request, 'project_ticket/project.html', {'project':project})
 
