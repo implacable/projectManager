@@ -1,4 +1,44 @@
 {% extends 'project_ticket/base.html' %}
+{% block 'styling' %}
+{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static 'project_ticket/css/project_style.css' %}" />
+{% endblock %}
+
+
 {% block 'content' %}
-	{{ project.id }}
+	<div class="row">
+		<div class="col-md-12">
+			<div class="project">
+				<div class="row">
+					<div class="col-md-4">
+						<h3> {{ project.name }} </h3>
+						<p> Description: {{ project.description }} </p>
+					</div>
+
+					<div class="col-md-4">
+						<h3> Personnel: </h3>
+						<p> Client: {{ project.client }} </p>
+						
+						<p> Project Manager(s): </p>
+						<ul>
+							{% for proj_man in project.project_manager.all %}
+								<li>{{ proj_man }}</li>
+							{% endfor %}
+						</ul>
+
+						<p> Developer(s): </p>
+						<ul>
+							{% for dev in project.developer.all %}
+								<li> {{ dev }} </li>
+							{% endfor %}
+						</ul>
+
+						<p> Estimated date of completion: {{ project.project_due }} </p>
+					</div>
+
+					<div class="col-md-4"></div>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}
