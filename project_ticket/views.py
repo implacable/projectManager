@@ -44,10 +44,6 @@ def logout_view(request):
     return HttpResponseRedirect(reverse('home'))
 
 def home(request):
-    """
-    The landing page is static content 
-    that is rendered here using Django.
-    """
     return render(request, 'project_ticket/landing.html', {'user': request.user})
 
 @login_required(login_url='login')
