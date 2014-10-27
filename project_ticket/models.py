@@ -33,3 +33,13 @@ class Ticket(models.Model):
 		('back_log', 'Back Log'),
 	)
 	status = models.CharField(max_length=32, blank=True, null=True, choices=ticket_statuss)
+
+
+class Activity_Feed(models.Models):
+    project = models.ForeignKey(Project)
+    date_edited = models.DateTimeField(default= datetime.now)
+
+
+class Activity_feed_action(models,Models):
+    activityFeed = models.ForeignKey(Activity_Feed)
+    action_date = models.DateTimeField(default= datetime.now)
