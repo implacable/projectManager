@@ -35,8 +35,7 @@ class Ticket(models.Model):
         status = models.CharField(max_length=32, blank=True, null=True, choices=ticket_statuss)
 
 class ActionReport(models.Model):
+    project = models.ForeignKey(Project, related_name='project')
+    developer = models.ManyToManyField(MyUser, related_name = 'developer')
     date_created = models.DateTimeField(default=datetime.now)
-    activity_feed = models.ForeignKey(ActivityFeed)
 
-class ActivityFeed(models.Model):
-    project = models.OneToOne(Project, related_name='project')
