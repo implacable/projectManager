@@ -12,7 +12,7 @@ class Project(models.Model):
 	project_due = models.DateField(blank=True, null=True)
 
 	def __unicode__(self):
-		return self.project_name
+		return self.name
 
 
 class Ticket(models.Model):
