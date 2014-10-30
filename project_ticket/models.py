@@ -41,8 +41,10 @@ class Comment(models.Model):
     date_submitted = models.DateTimeField(default = datetime.now)
     user = models.CharField(max_length = 120)
 
-    # create save override function
+    # User should not have to input their name again.
+    # Process is sent to a view.
+    # View should be
 
-    def save(self):
-        self.user = request.user.full_name()
-        super(Comment, self).save()
+    # def save(self):
+    #     self.user = request.user.full_name()
+    #     super(Comment, self).save()
