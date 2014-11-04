@@ -10,9 +10,9 @@ class TicketInline(admin.TabularInline):
 class TicketComment(admin.ModelAdmin):
 	fieldsets = [
 		('None',			{'fields':['user']}),
-		('Ticket',			{'fields':['Ticket']}),
+		('Ticket',			{'fields':['ticket']}),
 		('Date commented',	{'fields':['date_submitted']}),
-		('Comment',			{'fields':['text'], 'classes':['collapse']}),
+		('Comment',			{'fields':['text']}),
 	]
 	
 class ProjectAdmin(admin.ModelAdmin):
@@ -28,3 +28,4 @@ class ProjectAdmin(admin.ModelAdmin):
 	
 
 admin.site.register(Project,ProjectAdmin)
+admin.site.register(Comment,TicketComment)
