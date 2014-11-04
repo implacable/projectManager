@@ -12,7 +12,7 @@ class Project(models.Model):
 	project_due = models.DateField(blank=True, null=True)
 
 	def __unicode__(self):
-		return self.project_name
+		return self.name
 
 
 class Ticket(models.Model):
@@ -32,10 +32,19 @@ class Ticket(models.Model):
 		('completed', 'Completed'),
 		('back_log', 'Back Log'),
 	)
-        status = models.CharField(max_length=32, blank=True, null=True, choices=ticket_statuss)
 
-class ActionReport(models.Model):
-    project = models.ForeignKey(Project, related_name='project')
-    developer = models.ManyToManyField(MyUser, related_name = 'developer')
-    date_created = models.DateTimeField(default=datetime.now)
+	status = models.CharField(max_length=32, blank=True, null=True, choices=ticket_statuss)
 
+# Insert Comment Class here!
+class Comment(models.Model):
+    ticket = models.ForeignKey(Ticket)
+    text = models.TextField(max_length = 1024)
+    date_submitted = models.DateTimeField(default = datetime.now)
+    user = models.CharField(max_length = 120)
+
+    # User should not have to input their name again.
+    # Process should be sent to view.
+
+    #def save(self):
+     #   self.user = request.user.full_name()
+      #  super(Comment, self).save()

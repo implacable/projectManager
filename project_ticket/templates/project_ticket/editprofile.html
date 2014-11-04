@@ -1,0 +1,32 @@
+{% extends 'project_ticket/base.html' %}
+{% block 'content' %}
+	<h1> Edit Profile Page </h1>
+	<h3> Hello, {{ user.first_name }} {{ user.last_name }}</h3>
+	<h3> Email: {{ user.email }} </h3>
+	<div class="row">
+		<div class="col-md-5">
+			<div class="well"> 
+				<form action='{{ request.path }}' method="POST" enctype="multipart/form-data">
+	                {% csrf_token %}
+	                <table>
+	                	{{ form.as_table }}
+	                	{{ form2.as_table }}
+	                </table>
+	            <p><p align="center">
+                <input type="submit" value="Save" onclick="window.location.replace('{% url 'editprofile' %}')">
+				<input class="reset" type="button" value="Cancel" 
+						onclick="window.location.replace('{% url 'profile' %}')">
+				</p></p>
+				{% if form2.new_password.value != form2.confirm_password.value %}
+					<div class="alert alert-danger">Error! Password did not match.</div>
+				{% elif form2.new_password.data %}
+					<div class="alert alert-success">Save! Profile updated.</div>
+				{% elif form.firstname.data %}
+					<div class="alert alert-success">Save! Profile updated.</div>
+				{% endif %}
+            </form>
+			</div>
+		</div>
+		</div>
+	</div>
+{% endblock %}
