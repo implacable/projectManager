@@ -48,3 +48,8 @@ class Comment(models.Model):
     #def save(self):
      #   self.user = request.user.full_name()
       #  super(Comment, self).save()
+
+
+class ActionReport(models.Model):
+    project = models.ForeignKey(Project, related_name="project")
+    message = models.CharField(max_length= 1024, default=" "):
