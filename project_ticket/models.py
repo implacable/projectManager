@@ -52,4 +52,4 @@ class Comment(models.Model):
 
 class ActionReport(models.Model):
     project = models.ForeignKey(Project, related_name="project")
-    message = models.CharField(max_length= 1024, default=" "):
+    message = models.CharField(max_length= 1024, default=" ")
