@@ -35,6 +35,12 @@ class Ticket(models.Model):
 
 	status = models.CharField(max_length=32, blank=True, null=True, choices=ticket_statuss)
 
+	def save(self):
+		action = ActionReport()
+		action.project = self.project
+		action.save()
+		super(Ticket, self).save()
+
 # Insert Comment Class here!
 class Comment(models.Model):
     ticket = models.ForeignKey(Ticket)
@@ -51,5 +57,12 @@ class Comment(models.Model):
 
 
 class ActionReport(models.Model):
-    project = models.ForeignKey(Project, related_name="project")
-    message = models.CharField(max_length= 1024, default=" ")
+    project = models.ForeignKey(Project, related_name="projects")
+    message = models.CharField(max_length= 32, default=" ")
+
+    def create_msg(self):
+    	self.message = "ticket "
+
+    def save(self):
+    	self.create_msg()
+    	super(ActionReport, self).save()
