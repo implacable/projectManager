@@ -38,7 +38,8 @@ class Ticket(models.Model):
 	def save(self):
 		action = ActionReport()
 		action.project = self.project
-		action.save()
+		new = self
+		action.save(new)
 		super(Ticket, self).save()
 
 # Insert Comment Class here!
@@ -60,9 +61,23 @@ class ActionReport(models.Model):
     project = models.ForeignKey(Project, related_name="projects")
     message = models.CharField(max_length= 32, default=" ")
 
-    def create_msg(self):
-    	self.message = "ticket "
+# Not sure about this implementation/logic but it works
+# possible fix: default status of ticket is None
+# need to do: figure out how to add a verb when ticket is deleted
+# 			  figure out how to log the user who change the ticket
+#			  figure out how to format date and time to show something more readable
+    def create_msg(self,new):
+    	if new.pk is not None:
+    		old = Ticket.objects.get(pk=new.pk)
+    		if old.status != new.status:
+    			verb = " changed %s status from %s to %s on %s." % (new.name, old.status, new.status,datetime.now())
+    		if old.name != new.name:
+    			verb = " change %s name to %s on %s." % (old.name,new.name,datetime.now())
+    	else:
+    		verb =  " added %s to %s on %s." % (new.name,new.status,datetime.now())
+    	self.message = verb
 
-    def save(self):
-    	self.create_msg()
+    def save(self,new):
+    	self.create_msg(new)
     	super(ActionReport, self).save()
+
