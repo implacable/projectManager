@@ -2,27 +2,62 @@
 {% block 'content' %}
 	<h1> Edit Profile Page </h1>
 	<div class="row">
-		<div class="col-md-5">
-			<div class="well"> 
-				<form action='{{ request.path }}' method="POST" enctype="multipart/form-data">
-	                {% csrf_token %}
-                	{{ form.as_p }}
-                	{{ form2.as_p }}
-	            <p><p align="center">
-                <input type="submit" value="Save" onclick="window.location.replace('{% url 'editprofile' %}')">
-				<input class="reset" type="button" value="Cancel" 
-						onclick="window.location.replace('{% url 'profile' %}')">
-				</p></p>
-				{% if form2.new_password.value != form2.confirm_password.value %}
-					<div class="alert alert-danger">Error! Password did not match.</div>
-				{% elif form2.new_password.data %}
-					<div class="alert alert-success">Save! Profile updated.</div>
-				{% elif form.firstname.data %}
-					<div class="alert alert-success">Save! Profile updated.</div>
-				{% endif %}
-            </form>
+		<div class="col-md-4"></div>
+		<div class="col-md-4 editprofile">
+
+			<form action='{{ request.path }}' method="POST" enctype="multipart/form-data">
+
+        	<div class="fieldWrapper">
+				<p>{{form.firstname.errors}}</p>
+				<p><label for="firstname">First Name:</label></p>
+				<p>{{form.firstname}}</p>
 			</div>
+
+			<div class="fieldWrapper">
+				<p>{{form.lastname.errors}}</p>
+				<p><label for="lastname">Last Name:</label></p>
+				<p>{{form.lastname}}</p>
+			</div>
+
+			<div class="fiedlWrapper">
+				<p>{{form.email.errors}}</p>
+				<p><label for="email">Email:</label></p>
+				<p>{{form.email}}</p>
+			</div>
+
+			<div class="fieldWrapper">
+				<p>{{form2.old_password.errors}}</p>
+				<p><label for="old_password">Old Password:</label></p>
+				<p>{{form2.old_password}}</p>
+			</div>
+
+			<div class="fieldWrapper">
+				<p>{{form2.new_password.errors}}</p>
+				<p><label for="new_password">New Password:</label></p>
+				<p>{{form2.new_password}}</p>
+			</div>
+
+			<div class="fieldWrapper">
+				<p>{{form2.confirm_password.errors}}</p>
+				<p><label for="confirm_password">Confirm Password:</label></p>
+				<p>{{form2.confirm_password}}</p>
+			</div>
+
+            <p><p align="center">
+            <input type="submit" value="Save" onclick="window.location.replace('{% url 'editprofile' %}')">
+			<input class="reset" type="button" value="Cancel" 
+					onclick="window.location.replace('{% url 'profile' %}')">
+			</p></p>
+			{% if form2.new_password.value != form2.confirm_password.value %}
+				<div class="alert alert-danger">Error! Password did not match.</div>
+			{% elif form2.new_password.data %}
+				<div class="alert alert-success">Save! Profile updated.</div>
+			{% elif form.firstname.data %}
+				<div class="alert alert-success">Save! Profile updated.</div>
+			{% endif %}
+        	</form>
 		</div>
+		<div class="col-md-4"></div>
 		</div>
 	</div>
 {% endblock %}
