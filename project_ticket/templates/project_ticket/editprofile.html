@@ -7,6 +7,8 @@
 
 			<form action='{{ request.path }}' method="POST" enctype="multipart/form-data">
 
+			{% csrf_token %}
+
         	<div class="fieldWrapper">
 				<p>{{form.firstname.errors}}</p>
 				<p><label for="firstname">First Name:</label></p>
