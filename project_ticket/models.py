@@ -14,6 +14,13 @@ class Project(models.Model):
 	def __unicode__(self):
 		return self.name
 
+	def save(self):
+		action = ActionReport()
+		new = self
+		action.name = self.name
+		action.save(new,"project")
+		super(Project, self).save()
+
 
 class Ticket(models.Model):
 	project = models.ForeignKey(Project, related_name = 'project')
@@ -26,11 +33,11 @@ class Ticket(models.Model):
 	# Set of choices for tickets
 	# Back logged tickets are kept for records
 	ticket_statuss = (
-		('queued', 'Queued'),
-		('in_progress', 'In Progress'),
-		('testing', 'Testing'),
-		('completed', 'Completed'),
-		('back_log', 'Back Log'),
+		('Queued', 'Queued'),
+		('In Progress', 'In Progress'),
+		('Testing', 'Testing'),
+		('Completed', 'Completed'),
+		('Back Log', 'Back Log'),
 	)
 
 	status = models.CharField(max_length=32, blank=True, null=True, choices=ticket_statuss)
@@ -39,7 +46,7 @@ class Ticket(models.Model):
 		action = ActionReport()
 		action.project = self.project
 		new = self
-		action.save(new)
+		action.save(new,"ticket")
 		super(Ticket, self).save()
 
 # Insert Comment Class here!
@@ -65,19 +72,23 @@ class ActionReport(models.Model):
 # possible fix: default status of ticket is None
 # need to do: figure out how to add a verb when ticket is deleted
 # 			  figure out how to log the user who change the ticket
-#			  figure out how to format date and time to show something more readable
-    def create_msg(self,new):
-    	if new.pk is not None:
-    		old = Ticket.objects.get(pk=new.pk)
-    		if old.status != new.status:
-    			verb = " changed %s status from %s to %s on %s." % (new.name, old.status, new.status,datetime.now())
-    		if old.name != new.name:
-    			verb = " change %s name to %s on %s." % (old.name,new.name,datetime.now())
-    	else:
-    		verb =  " added %s to %s on %s." % (new.name,new.status,datetime.now())
-    	self.message = verb
-
-    def save(self,new):
-    	self.create_msg(new)
+    def create_msg(self,new,md):
+    	if md == "ticket":
+    		if new.pk is not None:
+    			old = Ticket.objects.get(pk=new.pk)
+    			if old.status != new.status:
+	    			verb = " changed %s from %s to %s on " % (new.name, old.status, new.status)
+    			if old.name != new.name:
+	    			verb = " change %s name to %s on "
+    		else:
+	    		verb =  " added %s to %s on %s" % (new.name,new.status,datetime.now())
+		if md == "project":
+			if new.pk is not None:
+				old = Project.objects.get(pk=new.pk)
+				if old.name != new.name or old.description != new.description:
+					verb = " modified %s on " % (new.name)
+    	self.message = verb + "%s" % (datetime.now()).strftime(" %B %d, %Y at %l:%M.")
+    def save(self,new,md):
+    	self.create_msg(new,md)
     	super(ActionReport, self).save()
 
