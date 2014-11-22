@@ -9,7 +9,7 @@ class TicketInline(admin.TabularInline):
 
 class TicketComment(admin.ModelAdmin):
 	fieldsets = [
-		('None',			{'fields':['user']}),
+		('None',			{'fields':['recent_user']}),
 		('Ticket',			{'fields':['ticket']}),
 		('Date commented',	{'fields':['date_submitted']}),
 		('Comment',			{'fields':['text']}),
@@ -17,6 +17,7 @@ class TicketComment(admin.ModelAdmin):
 	
 class ProjectAdmin(admin.ModelAdmin):
 	fieldsets = [
+			 ('None',				 {'fields': ['recent_user']}),
 	         ('None',                {'fields': ['name']}),
 	         ('Project Description', {'fields': ['description'], 'classes': ['collapse']}),
 	         ('Client',              {'fields': ['client']}),
