@@ -4,10 +4,35 @@
 	min-height: 630px;
 }
 
+.account_info p {
+	padding-left: 10px;
+	padding-right: 5px;
+	padding-bottom: 5px;
+	padding-top: 5px;
+}
+
+.account_info h3 {
+	padding-left: 10px;
+	padding-right: 5px;
+	padding-bottom: 5px;
+	padding-top: 10px;
+}
+
+.edit {
+	margin: 5px 5px 5px 5px;
+}
+
 .my_projects {
 	border-radius: 10px;
 	background-color: #0296db;
 	min-height: 300px;
+}
+
+.my_projects h3 {
+	padding-left: 10px;
+	padding-right: 5px;
+	padding-bottom: 5px;
+	padding-top: 10px;
 }
 
 .activity_feeds {
@@ -17,7 +42,17 @@
 }
 
 .my_projects a {
-	color: black;
+	padding-left: 10px;
+	padding-right: 5px;
+	padding-bottom: 5px;
+	padding-top: 5px;
+	color: #383838;
+	font-size: 30px;
+}
+
+.my_projects a:hover {
+	text-decoration: none;
+	color: white;
 }
 
 hr {
@@ -25,5 +60,3 @@ hr {
 	padding: 10px;
 	margin: 0 auto;
 }
-
-/* This page needs to be styled much further */

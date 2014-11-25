@@ -24,6 +24,12 @@
 				<hr>
 				<p> Account type: </p>
 				<p> {{ user.perm }} </p>
+				<div class="edit">
+					<button class="btn btn-default edit" 
+					        type="button" 
+					        onclick="window.location.replace('{% url 'editprofile' %}')">
+						Edit Profile</button>
+				</div>
 			</div>
 		</div>
 
@@ -35,7 +41,7 @@
 						<h3> My Projects: </h3>
 						<ol>
 						{% for project in projects %}
-							<li><h3><a href="{% url 'project' project.id %}"> {{ project.name }} </a></h3></li>
+							<li><a href="{% url 'project' project.id %}"> {{ project.name }} </a></li>
 						{% endfor %}
 						</ol>
 					</div>
@@ -52,5 +58,4 @@
 		
 		</div>
 	</div>
-	<button type="button" onclick="window.location.replace('{% url 'editprofile' %}')">Edit Profile</button>
 {% endblock %}
