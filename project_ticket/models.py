@@ -2,30 +2,7 @@ from django.db import models
 from user_auth.models import MyUser
 from datetime import datetime
 
-#	Needs Attention: Deleted create_msg function and moved its
-# 						implementation to save functions.(Why?)
 
-#						*Deleted create_msg() because it was no longer relevant as it 
-#							contained only 1 line of code and can implement that code
-#							to save() function
-#					 	*By doing above, was able to create an ActionReport object
-#							for Project and Ticket when its instances were changed
-#					 	*Was able the remove the extra parameter from the save function
-#						*Was able to create ActionReport objects for Project and Ticket
-#							even when both were modified at the same time
-#					This new implementation might be silly or hacky?
-
-#			 To do:	
-#					1. Implement save override in Comments/
-#					2. Changed variable names to something more descriptive
-#						i.e. old,verb,new
-#					3. Check the logic of save() in Project/
-#					4. Improve the verb(s) values(message)
-#				*	5. Error with line 41 when creating a new project/
-#					6. Refactor
-#					7. Delete this comment after ActionReport is fully functional on
-#						all models
-#					8. change default value of ticket to Queud
 class Project(models.Model):
 	client = models.OneToOneField(MyUser, related_name = 'client')
 	project_manager = models.ManyToManyField(MyUser, related_name = 'project_manager')

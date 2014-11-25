@@ -3,4 +3,5 @@
 	<h1> Welcome to the profile page </h1>
 	<h3> Hello, {{ user.email }} </h3>
 	<button type="button" onclick="window.location.replace('{% url 'editprofile' %}')">Edit Profile</button>
+	<button type="button" onclick="window.location.replace('{% url 'addticket' %}')">Add Ticket</button>
 {% endblock %}
