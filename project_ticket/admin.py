@@ -1,5 +1,5 @@
 from django.contrib import admin
-from project_ticket.models import Project, Ticket
+from project_ticket.models import Project, Ticket, Comment
 
 
 # Register your models here.
@@ -7,7 +7,14 @@ class TicketInline(admin.TabularInline):
 	model = Ticket
 	extra = 0
 
-
+class TicketComment(admin.ModelAdmin):
+	fieldsets = [
+		('None',			{'fields':['user']}),
+		('Ticket',			{'fields':['ticket']}),
+		('Date commented',	{'fields':['date_submitted']}),
+		('Comment',			{'fields':['text']}),
+	]
+	
 class ProjectAdmin(admin.ModelAdmin):
 	fieldsets = [
 	         ('None',                {'fields': ['name']}),
@@ -21,3 +28,4 @@ class ProjectAdmin(admin.ModelAdmin):
 	
 
 admin.site.register(Project,ProjectAdmin)
+admin.site.register(Comment,TicketComment)
