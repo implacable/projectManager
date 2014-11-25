@@ -1,44 +1,73 @@
-{% extends 'project_ticket/base.html' %}
-{% block 'styling' %}
-{% load staticfiles %}
-	<link rel="stylesheet" type="text/css" href="{% static 'project_ticket/css/project_style.css' %}" />
-{% endblock %}
+<html>
+	<head>
+		{% load staticfiles %}
+		<link href='http://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" type="text/css" href="{% static 'project_ticket/css/master.css' %}" />
+		<link rel="stylesheet" type="text/css" href="{% static 'project_ticket/css/project_style.css' %}" />
+		<link rel="stylesheet" type="text/css" href="{% static 'project_ticket/css/bootstrap.min.css' %}" />
+		
+	</head>
+	<body>
+		<div class="full_nav">
+			{% if user.is_authenticated %}
+			<ul class="navbar">
+				<li><a href="{% url 'logout' %}"> Logout </a>
+				<li><a href="{% url 'profile' %}"> Profile </a></li>
+				<li><a href="{% url 'home' %}"> Home </a></li>
+			</ul>
+			{% else %}
+			<ul class="navbar">
+				<li><a href="{% url 'login' %}"> Login </a></li>
+				<li><a href="{% url 'register' %}"> Register </a></li>
+				<li><a href="{% url 'home' %}"> Home </a></li>
+			</ul>
+			{% endif %}
+		</div>
 
+		<div class="small_buffer"></div>
 
-{% block 'content' %}
-	<div class="row">
-		<div class="col-md-12">
-			<div class="project">
+		<div class="small_wrapper">
+
+		<div class="row">
+			<div class="col-md-9">
 				<div class="row">
-					<div class="col-md-4">
-						<h3> {{ project.name }} </h3>
-						<p> Description: {{ project.description }} </p>
+					<div class="col-md-3">
+						<div class="content">
+							<h3>Queued</h3>
+							<hr>
+						</div>
 					</div>
-
-					<div class="col-md-4">
-						<h3> Personnel: </h3>
-						<p> Client: {{ project.client }} </p>
-						
-						<p> Project Manager(s): </p>
-						<ul>
-							{% for proj_man in project.project_manager.all %}
-								<li>{{ proj_man }}</li>
-							{% endfor %}
-						</ul>
-
-						<p> Developer(s): </p>
-						<ul>
-							{% for dev in project.developer.all %}
-								<li> {{ dev }} </li>
-							{% endfor %}
-						</ul>
-
-						<p> Estimated date of completion: {{ project.project_due }} </p>
+					<div class="col-md-3">
+						<div class="content">
+							<h3>In Progress</h3>
+							<hr>
+						</div>
 					</div>
-
-					<div class="col-md-4"></div>
+					<div class="col-md-3">
+						<div class="content">
+							<h3>Testing</h3>
+							<hr>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="content">
+							<h3>Completed</h3>
+							<hr>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-md-3">
+				<div class="content">
+					<h3>Recent Actions</h3>
+					<hr>
 				</div>
 			</div>
 		</div>
-	</div>
-{% endblock %}
+
+		</div>
+		<div class="footer">
+		</div>
+	</body>
+</html>
