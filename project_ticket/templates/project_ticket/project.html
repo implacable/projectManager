@@ -37,7 +37,7 @@
 							<hr>
 							
 							{% for ticket in tickets %}
-								{% if ticket.status == "queued" %}
+								{% if ticket.status == "Queued" %}
 								<div class="ticket_wrapper">
 									<a href="#">
 										<div class="ticket">
@@ -57,7 +57,7 @@
 
 							{% for ticket in tickets %}
 							<!-- Todo: This if might break due to some changes Juan made -->
-								{% if ticket.status == "in_progress" %}
+								{% if ticket.status == "In Progress" %}
 								<div class="ticket_wrapper">
 									<a href="#">
 										<div class="ticket">
@@ -76,7 +76,7 @@
 							<hr>
 
 							{% for ticket in tickets %}
-								{% if ticket.status == "testing" %}
+								{% if ticket.status == "Testing" %}
 								<div class="ticket_wrapper">
 									<a href="#">
 										<div class="ticket">
@@ -95,7 +95,7 @@
 							<hr>
 
 							{% for ticket in tickets %}
-								{% if ticket.status == "completed" %}
+								{% if ticket.status == "Completed" %}
 								<div class="ticket_wrapper">
 									<a href="#">
 										<div class="ticket">
