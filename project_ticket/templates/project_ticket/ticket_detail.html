@@ -33,12 +33,6 @@
 					<h2> Comments: </h2>
 					<hr>
 
-					<form ng-submit="ticketctrl.add_comment_wrapper();">
-						<input type="text"
-							   ng-model="ticketctrl.comment_data"
-							   placeholder="Make a comment">
-					</form>
-
 					{% for comment in comments %}
 						<h3> {{ comment.user }}</h3>
 						<p> {{ comment.text }}</p>
