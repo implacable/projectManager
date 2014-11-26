@@ -13,7 +13,6 @@
 			{% if user.is_authenticated %}
 			<ul class="navbar">
 				<li><a href="{% url 'logout' %}"> Logout </a>
-				<li><a href=""> My Projects </a></li>
 				<li><a href="{% url 'profile' %}"> Profile </a></li>
 				<li><a href="{% url 'home' %}"> Home </a></li>
 			</ul>
@@ -29,6 +28,7 @@
 			{% block 'content' %}
 
 			{% endblock %}
+            <div class="push"></div>
 		</div>
 		<div class="footer">
 		</div>
