@@ -1,7 +1,61 @@
 {% extends 'project_ticket/base.html' %}
+
+{% block 'styling' %}
+{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static 'project_ticket/css/profile_style.css' %}" />
+{% endblock %}
+
+
 {% block 'content' %}
-	<h1> Welcome to the profile page </h1>
-	<h3> Hello, {{ user.email }} </h3>
-	<button type="button" onclick="window.location.replace('{% url 'editprofile' %}')">Edit Profile</button>
-	<button type="button" onclick="window.location.replace('{% url 'addticket' %}')">Add Ticket</button>
+	<div class="row">
+		
+		<div class="col-md-4 col-xs-12">
+			<div class="account_info">
+				<h3> Account Info: </h3>
+				<hr>
+				<p> Name: </p>
+				<p> {{ user.full_name }} </p>
+				<hr>
+				<p> Email: </p>
+				<p> {{ user.email }}</p>
+				<hr>
+				<p> Date Joined: </p>
+				<p> {{ user.date_joined }} </p>
+				<hr>
+				<p> Account type: </p>
+				<p> {{ user.perm }} </p>
+				<div class="edit">
+					<button class="btn btn-default edit" 
+					        type="button" 
+					        onclick="window.location.replace('{% url 'editprofile' %}')">
+						Edit Profile</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-8 col-xs-12">
+			
+			<div class="row">
+				<div class="col-md-12 col-xs-12">
+					<div class="my_projects">
+						<h3> My Projects: </h3>
+						<ol>
+						{% for project in projects %}
+							<li><a href="{% url 'project' project.id %}"> {{ project.name }} </a></li>
+						{% endfor %}
+						</ol>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12 col-xs-12">
+					<div class="activity_feeds">
+						<h3> Activity Feed: </h3>
+					</div>
+				</div>
+			</div>
+		
+		</div>
+	</div>
 {% endblock %}

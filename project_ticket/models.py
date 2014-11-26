@@ -28,7 +28,8 @@ class Project(models.Model):
 
 
 class Ticket(models.Model):
-	project = models.ForeignKey(Project, related_name = 'project')
+	# Changed related name from project to tickets - J
+	project = models.ForeignKey(Project, related_name = 'tickets')
 	developer = models.ManyToManyField(MyUser, related_name = 'developer')
 	name = models.CharField(max_length=32)
 	description_ticket = models.TextField(max_length = 1024, default="")

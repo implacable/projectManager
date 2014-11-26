@@ -1,0 +1,127 @@
+<html>
+	<head>
+		{% load staticfiles %}
+		<link href='http://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" type="text/css" href="{% static 'project_ticket/css/master.css' %}" />
+		<link rel="stylesheet" type="text/css" href="{% static 'project_ticket/css/project_style.css' %}" />
+		<link rel="stylesheet" type="text/css" href="{% static 'project_ticket/css/bootstrap.min.css' %}" />
+		
+	</head>
+	<body>
+		<div class="full_nav">
+			{% if user.is_authenticated %}
+			<ul class="navbar">
+				<li><a href="{% url 'logout' %}"> Logout </a>
+				<li><a href="{% url 'profile' %}"> Profile </a></li>
+				<li><a href="{% url 'home' %}"> Home </a></li>
+			</ul>
+			{% else %}
+			<ul class="navbar">
+				<li><a href="{% url 'login' %}"> Login </a></li>
+				<li><a href="{% url 'register' %}"> Register </a></li>
+				<li><a href="{% url 'home' %}"> Home </a></li>
+			</ul>
+			{% endif %}
+		</div>
+
+		<div class="small_buffer"></div>
+
+		<div class="small_wrapper">
+
+		<div class="row">
+			<div class="col-md-9">
+				<div class="row">
+					<div class="col-md-3">
+						<div class="content">
+							<h3>Queued</h3>
+							<hr>
+							
+							{% for ticket in tickets %}
+								{% if ticket.status == "queued" %}
+								<div class="ticket_wrapper">
+									<a href="#">
+										<div class="ticket">
+											<p> {{ ticket.name }} </p>
+										</div>
+									</a>
+								</div>
+								{% endif %}
+							{% endfor %}
+						
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="content">
+							<h3>In Progress</h3>
+							<hr>
+
+							{% for ticket in tickets %}
+							<!-- Todo: This if might break due to some changes Juan made -->
+								{% if ticket.status == "in_progress" %}
+								<div class="ticket_wrapper">
+									<a href="#">
+										<div class="ticket">
+											<p> {{ ticket.name }} </p>
+										</div>
+									</a>
+								</div>
+								{% endif %}
+							{% endfor %}
+
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="content">
+							<h3>Testing</h3>
+							<hr>
+
+							{% for ticket in tickets %}
+								{% if ticket.status == "testing" %}
+								<div class="ticket_wrapper">
+									<a href="#">
+										<div class="ticket">
+											<p> {{ ticket.name }} </p>
+										</div>
+									</a>
+								</div>
+								{% endif %}
+							{% endfor %}
+
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="content">
+							<h3>Completed</h3>
+							<hr>
+
+							{% for ticket in tickets %}
+								{% if ticket.status == "completed" %}
+								<div class="ticket_wrapper">
+									<a href="#">
+										<div class="ticket">
+											<p> {{ ticket.name }} </p>
+										</div>
+									</a>
+								</div>
+								{% endif %}
+							{% endfor %}
+
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-md-3">
+				<div class="content">
+					<h3>Recent Actions</h3>
+					<hr>
+
+				</div>
+			</div>
+		</div>
+
+		</div>
+		<div class="footer">
+		</div>
+	</body>
+</html>
