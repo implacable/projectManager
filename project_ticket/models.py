@@ -54,17 +54,17 @@ class Ticket(models.Model):
 		action.project = self.project
 		if self.pk is not None:
 			old = Ticket.objects.get(pk=self.pk)
-			if old.status != self.status:
+			if old.status.lower() != self.status.lower():
 				verb = "%s changed %s from %s to %s on " % (self.recent_user,self.name, old.status, self.status)
 				action.message = verb + "%s" % (datetime.now()).strftime(" %B %d, %Y at %H:%M")
 				action.save()
-			if old.name != self.name or old.description_ticket != self.description_ticket:
+			if old.name.lower() != self.name.lower() or old.description_ticket.lower() != self.description_ticket.lower():
 				verb = "%s edited %s on " % (self.recent_user,self.name)
 				action.message = verb + "%s" % (datetime.now()).strftime(" %B %d, %Y at %H:%M")
 				action.save()
-			
+
 		else:
-			verb =  "%s added %s to %s in %s on " % (self.recent_user,self.name,self.status,self.project.name)    	
+			verb = "%s added %s to %s in %s on " % (self.recent_user, self.name, self.status, self.project.name)
 			action.message = verb + "%s" % (datetime.now()).strftime(" %B %d, %Y at %H:%M")
 			action.save()
 		super(Ticket, self).save()
@@ -82,7 +82,7 @@ class Comment(models.Model):
     	action.project = self.ticket.project
     	if self.pk is not None:
     		old = Comment.objects.get(pk=self.pk)
-    		if (old.text != self.text or old.date_submitted != self.date_submitted 
+    		if (old.text != self.text or old.date_submitted != self.date_submitted
     			or self.user != old.user or old.ticket != self.ticket):
     			verb = "%s edited comment on %s on " % (self.recent_user, self.ticket.name)
     			action.message = verb + "%s" % (datetime.now()).strftime(" %B %d, %Y at %H:%M")
