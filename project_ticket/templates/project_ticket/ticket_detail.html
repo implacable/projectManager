@@ -17,9 +17,12 @@
 					<div class="header">
 						<h2> {{ ticket.name }} </h2>
 
-					 <form ng-submit="wallctrl.change_status()">
-					    <select ng-model="ticketctrl.ticket_status" 
-					            ng-options="item as item.name for item in items"></select>
+					<form ng-submit="ticketctrl.change_status();">
+						<!-- <input type="text"
+							   ng-model="ticketctrl.ticket_status"> -->
+						<select ng-model="ticketctrl.ticket_status" 
+								ng-options="item as item.name for item in items">
+						</select>
 					</form>	
 					</div>
 
@@ -36,6 +39,12 @@
 					<h2> Comments: </h2>
 					<hr>
 
+					<form ng-submit="ticketctrl.add_comment_wrapper();">
+						<input type="text"
+							   ng-model="ticketctrl.comment_data"
+							   placeholder="Make a comment">
+					</form>	
+					</div>
 				</div>
 			</div>
 		</div>

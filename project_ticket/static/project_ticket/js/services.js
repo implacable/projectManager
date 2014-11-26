@@ -20,7 +20,27 @@
         return me;
     }
 
+    function AddCommentService($http) {
+        me = this;
+
+        me.add_comment = function(content){
+                $http.post('/user/add_comment/', {content: content})
+                 .success(function(data) {
+                    list = [data];
+                    return list;
+                })
+                .error(function(data) {
+                    console.log(data);
+                });
+            }
+
+        };
+
+        return me;
+    }
+
 	angular
-	    .module('Ticket')
-		.service('ChangeTicketStatus', ChangeTicketStatus;
+	    .module('Ticket');
+		.service('ChangeTicketStatus', ChangeTicketStatus);
+        .service('AddCommentService', AddCommentService);
 })();
