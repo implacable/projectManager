@@ -39,7 +39,7 @@
 							{% for ticket in tickets %}
 								{% if ticket.status == "queued" %}
 								<div class="ticket_wrapper">
-									<a href="#">
+									<a href="{% url 'ticket_detail' ticket.id %}">
 										<div class="ticket">
 											<p> {{ ticket.name }} </p>
 										</div>
@@ -59,7 +59,7 @@
 							<!-- Todo: This if might break due to some changes Juan made -->
 								{% if ticket.status == "in_progress" %}
 								<div class="ticket_wrapper">
-									<a href="#">
+									<a href="{% url 'ticket_detail' ticket.id %}">
 										<div class="ticket">
 											<p> {{ ticket.name }} </p>
 										</div>
@@ -78,7 +78,7 @@
 							{% for ticket in tickets %}
 								{% if ticket.status == "testing" %}
 								<div class="ticket_wrapper">
-									<a href="#">
+									<a href="{% url 'ticket_detail' ticket.id %}">
 										<div class="ticket">
 											<p> {{ ticket.name }} </p>
 										</div>
@@ -97,7 +97,7 @@
 							{% for ticket in tickets %}
 								{% if ticket.status == "completed" %}
 								<div class="ticket_wrapper">
-									<a href="#">
+									<a href="{% url 'ticket_detail' ticket.id %}">
 										<div class="ticket">
 											<p> {{ ticket.name }} </p>
 										</div>

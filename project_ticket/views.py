@@ -1,7 +1,7 @@
 from user_auth.forms import LogIn, CreateUser
 from project_ticket.forms import EditInfo, EditPassword
 from user_auth.models import MyUser
-from project_ticket.models import Project
+from project_ticket.models import Project, Ticket
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
@@ -109,6 +109,12 @@ def project(request, project_id):
 
     return render(request, 'project_ticket/project.html', {'project':project, 'tickets': all_tickets })
 
+
+@login_required(login_url='login')
+def ticket_detail(request, ticket_id):
+    # A user could actually manually access these tickets right now. Major secruity issue
+    ticket = Ticket.objects.get(pk=ticket_id)
+    return render(request, 'project_ticket/ticket_detail.html', { 'ticket':ticket})
 
 
 @login_required(login_url='login')
