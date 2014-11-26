@@ -7,6 +7,7 @@ urlpatterns = patterns('',
 	url(r'^project/(?P<project_id>\d+)/$', views.project, name="project"),
 	url(r'^profile$', views.profile, name='profile'),
 	url(r'^editprofile$', views.editprofile, name='editprofile'),
+	url(r'^addticket$', views.addticket, name='addticket'),
 	url(r'^register$', views.register, name='register'),
     url(r'^$', views.login_view, name='login'),
    )
