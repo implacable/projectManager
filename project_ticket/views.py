@@ -1,5 +1,6 @@
 from user_auth.forms import LogIn, CreateUser
-from project_ticket.forms import EditInfo, EditPassword
+from project_ticket.forms import EditInfo, EditPassword, AddTicket
+from project_ticket.models import Project,Ticket,Comment,ActionReport
 from user_auth.models import MyUser
 from project_ticket.models import Project, Ticket
 from django.contrib.auth.decorators import login_required
@@ -152,6 +153,26 @@ def editprofile(request):
     return render(request, 'project_ticket/editprofile.html', {'form':form, 'form2':form2, 'user': request.user})
 
 
+@login_required(login_url='login')
+def addticket(request):
+    user = request.user
+    ticket = Ticket()
+    if request.method == 'POST':
+        form = AddTicket(request.POST)
+        if form.is_valid():
+            ticket.name = form.cleaned_data['name']
+            ticket.description_ticket = form.cleaned_data['description']
+            ticket.recent_user = user.email
+            ticket.project = form.cleaned_data['project']
+            ticket.status = form.cleaned_data['status']
+            ticket.save()
+            ticket.developer = form.cleaned_data['developer'] # needs to be assigned after ticket.save(why?)
+                                                              # ManyToManyField items can't be added to a model until after it's been saved.
+            return HttpResponseRedirect(reverse('profile'))
+    else:
+        form = AddTicket()
+
+    return render(request, 'project_ticket/addticket.html', {'form':form, 'user':request.user})
 
 def register(request):
     """
