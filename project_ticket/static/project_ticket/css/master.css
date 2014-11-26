@@ -1,3 +1,11 @@
+* {
+    margin: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
 .full_nav {
     border-bottom: 3px solid #01DDC7;
 	background-color: #0296db;
@@ -23,7 +31,7 @@
 
 .navbar a {
     font-weight: 600;
-	font-size: 25px; 
+	font-size: 25px;
 	font-family: 'Roboto', sans-serif;
 	text-decoration: none;
 	line-height:58px;
@@ -37,13 +45,14 @@
 
 .wrapper {
 	width: 90%;
+    min-height: 100%;
     max-width: 960px;
-    margin: 0 auto;
+    margin: 0 auto -60px;
     display: block;
     position: relative;
 }
 
-.footer {
+.footer, .push {
     border-top: 3px solid #01DDC7;
 	background-color: #0296db;
 	display: block;
@@ -55,7 +64,7 @@
 }
 
 .login {
-    /* 
+    /*
     Making the screen smaller then half way causes
     the form to display out of the div
     min-width does not work
@@ -71,10 +80,10 @@
     margin: auto;
     text-align: center;
     padding: 1px;
-}   
+}
 
 .register {
-    /* 
+    /*
     Making the screen smaller then half way causes
     the form to display out of the div
     min-width does not work
