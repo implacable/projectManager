@@ -35,24 +35,77 @@
 						<div class="content">
 							<h3>Queued</h3>
 							<hr>
+							
+							{% for ticket in tickets %}
+								{% if ticket.status == "queued" %}
+								<div class="ticket_wrapper">
+									<a href="#">
+										<div class="ticket">
+											<p> {{ ticket.name }} </p>
+										</div>
+									</a>
+								</div>
+								{% endif %}
+							{% endfor %}
+						
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div class="content">
 							<h3>In Progress</h3>
 							<hr>
+
+							{% for ticket in tickets %}
+							<!-- Todo: This if might break due to some changes Juan made -->
+								{% if ticket.status == "in_progress" %}
+								<div class="ticket_wrapper">
+									<a href="#">
+										<div class="ticket">
+											<p> {{ ticket.name }} </p>
+										</div>
+									</a>
+								</div>
+								{% endif %}
+							{% endfor %}
+
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div class="content">
 							<h3>Testing</h3>
 							<hr>
+
+							{% for ticket in tickets %}
+								{% if ticket.status == "testing" %}
+								<div class="ticket_wrapper">
+									<a href="#">
+										<div class="ticket">
+											<p> {{ ticket.name }} </p>
+										</div>
+									</a>
+								</div>
+								{% endif %}
+							{% endfor %}
+
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div class="content">
 							<h3>Completed</h3>
 							<hr>
+
+							{% for ticket in tickets %}
+								{% if ticket.status == "completed" %}
+								<div class="ticket_wrapper">
+									<a href="#">
+										<div class="ticket">
+											<p> {{ ticket.name }} </p>
+										</div>
+									</a>
+								</div>
+								{% endif %}
+							{% endfor %}
+
 						</div>
 					</div>
 				</div>
@@ -62,6 +115,7 @@
 				<div class="content">
 					<h3>Recent Actions</h3>
 					<hr>
+
 				</div>
 			</div>
 		</div>

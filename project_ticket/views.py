@@ -105,7 +105,9 @@ def project(request, project_id):
     else:
         return HttpResponseRedirect(reverse('profile'))
 
-    return render(request, 'project_ticket/project.html', {'project':project})
+    all_tickets = project.tickets.all()
+
+    return render(request, 'project_ticket/project.html', {'project':project, 'tickets': all_tickets })
 
 
 

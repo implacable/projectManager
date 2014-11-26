@@ -22,6 +22,35 @@
     position: relative;
 }
 
+.ticket_wrapper {
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+.ticket_wrapper a:hover {
+	text-decoration: none;
+}
+
+.ticket {
+	width: 97%;
+	margin: 0 auto;
+	min-height: 50px;
+	border-radius: 5px;
+	background-color: #01DDC7; 
+	border: 3px groove #0296db;
+}
+
+.ticket p {
+	text-decoration: none;
+	color: #383838;
+	margin-left: 5px;
+}
+
+a:hover .ticket {
+	opacity: 0.75;
+	background-color: #01DDC7; 
+}
+
 hr {
 	color: white;
 	margin: 0 auto;
