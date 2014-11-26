@@ -27,15 +27,32 @@
 			</div>
 		</div>
 
-		<div class="row push">
+		<div class="small_buffer"></div>
+
+		<div class="row">
 			<div class="col-md-12">
 				<div class="comments">
 					<h2> Comments: </h2>
-					<hr>
 
+					<div class="text_box">
+						<form action="{{ request.path}}" method="POST">
+							{% csrf_token %}
+							<div style="overflow: hidden; display: inline-block; border-radius: 10px;">
+							{{ form.comment }}
+							</div>
+							<p><input type="submit" value="Submit" class="btn btn-default"></p>
+						</form>
+					</div>
+					
+					<hr>
+					
 					{% for comment in comments %}
-						<h3> {{ comment.user }}</h3>
-						<p> {{ comment.text }}</p>
+						<div class="comment_buffer"></div>
+						<div class="comment_box">
+							<h3> {{ comment.recent_user }}</h3>
+							<p> {{ comment.text }}</p>
+						</div>
+						<div class="comment_buffer"></div>
 					{% endfor %}
 
 					</div>

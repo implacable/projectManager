@@ -48,3 +48,24 @@ hr {
 	color: white;
 	margin: 0 auto;
 }
+
+.text_box {
+	margin-left: 10px;
+}
+
+.text_box p {
+	padding-top: 10px;
+}
+
+.comment_box {
+	width: 97%;
+	background-color: #01DDC7;
+	border: 3px groove #0296db;
+	border-radius: 10px;
+	margin: 0 auto;
+}
+
+.comment_buffer {
+	padding-top: 10px;
+}
+

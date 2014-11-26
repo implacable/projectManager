@@ -1,5 +1,5 @@
 from user_auth.forms import LogIn, CreateUser
-from project_ticket.forms import EditInfo, EditPassword, AddTicket
+from project_ticket.forms import EditInfo, EditPassword, AddTicket, AddComment
 from project_ticket.models import Project,Ticket,Comment,ActionReport
 from user_auth.models import MyUser
 from project_ticket.models import Project, Ticket
@@ -115,8 +115,22 @@ def project(request, project_id):
 def ticket_detail(request, ticket_id):
     # A user could actually manually access these tickets right now. Major secruity issue
     ticket = Ticket.objects.get(pk=ticket_id)
+    new_comment = Comment()
+    user = request.user
+    if request.method == 'POST':
+        form = AddComment(request.POST)
+        if form.is_valid():
+            new_comment.text = form.cleaned_data['comment']
+            new_comment.recent_user = user.email
+            new_comment.ticket = ticket
+            new_comment.save()
+            form = AddComment()
+    else:
+        form = AddComment()
+
+
     comments = ticket.comments.all()
-    context = { 'ticket':ticket, 'comments': comments}
+    context = { 'ticket':ticket, 'comments': comments, 'form': form}
     return render(request, 'project_ticket/ticket_detail.html', context)
 
 
