@@ -114,7 +114,9 @@ def project(request, project_id):
 def ticket_detail(request, ticket_id):
     # A user could actually manually access these tickets right now. Major secruity issue
     ticket = Ticket.objects.get(pk=ticket_id)
-    return render(request, 'project_ticket/ticket_detail.html', { 'ticket':ticket})
+    comments = ticket.comments.all()
+    context = { 'ticket':ticket, 'comments': comments}
+    return render(request, 'project_ticket/ticket_detail.html', context)
 
 
 @login_required(login_url='login')

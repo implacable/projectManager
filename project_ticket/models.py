@@ -34,10 +34,13 @@ class Ticket(models.Model):
 		('back_log', 'Back Log'),
 	)
 	status = models.CharField(max_length=32, blank=True, null=True, choices=ticket_statuss)
+	
+	def __unicode__(self):
+		return self.name
 
 # Insert Comment Class here!
 class Comment(models.Model):
-    ticket = models.ForeignKey(Ticket)
+    ticket = models.ForeignKey(Ticket, related_name='comments')
     text = models.TextField(max_length = 1024)
     date_submitted = models.DateTimeField(default = datetime.now)
     user = models.CharField(max_length = 120)

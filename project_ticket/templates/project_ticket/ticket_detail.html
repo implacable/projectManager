@@ -37,10 +37,18 @@
 						<input type="text"
 							   ng-model="ticketctrl.comment_data"
 							   placeholder="Make a comment">
-					</form>	
+					</form>
+
+					{% for comment in comments %}
+						<h3> {{ comment.user }}</h3>
+						<p> {{ comment.text }}</p>
+					{% endfor %}
+
 					</div>
 				</div>
 			</div>
+
+			<div class="small_buffer"></div>
 		</div>
 	</div>
 {% endblock %}
