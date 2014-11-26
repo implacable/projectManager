@@ -168,7 +168,7 @@ def addticket(request):
             ticket.save()
             ticket.developer = form.cleaned_data['developer'] # needs to be assigned after ticket.save(why?)
                                                               # ManyToManyField items can't be added to a model until after it's been saved.
-            return HttpResponseRedirect(reverse('profile'))
+            return HttpResponseRedirect(reverse('project', kwargs={ 'project_id':ticket.project.id }))
     else:
         form = AddTicket()
 
