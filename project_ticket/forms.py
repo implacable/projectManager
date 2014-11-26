@@ -9,7 +9,7 @@ class EditInfo(forms.Form):
 	lastname = forms.CharField(label = "Last Name")
 	email = forms.EmailField(label = "Email")
 
-	
+
 class EditPassword(forms.Form):
 	old_password = forms.CharField(widget=forms.PasswordInput(), label = "Old Password")
 	new_password = forms.CharField(widget=forms.PasswordInput(), label = "New Password")
