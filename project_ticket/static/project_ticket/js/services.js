@@ -26,8 +26,7 @@
         me.add_comment = function(content){
                 $http.post('/user/add_comment/', {content: content})
                  .success(function(data) {
-                    list = [data];
-                    return list;
+                    // Update old list of comments
                 })
                 .error(function(data) {
                     console.log(data);
@@ -35,6 +34,17 @@
             }
 
         };
+
+        me.get_comments = function(content){
+               $http.post('/user/get_comments/', {content: content})
+                 .success(function(data) {
+                    // Update list of comments
+                })
+                .error(function(data) {
+                    console.log(data);
+                });
+            }
+        }
 
         return me;
     }
