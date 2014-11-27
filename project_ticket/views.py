@@ -146,11 +146,11 @@ def ticket_detail(request, ticket_id):
 def change_ticket_status(request, ticket_id):
     ticket = Ticket.objects.get(pk=ticket_id)
 
-
     new_status = request.POST.get('status')
     if new_status == "--":
         pass
     else:
+        ticket.recent_user = request.user.email
         ticket.status = new_status
         ticket.save()
 
