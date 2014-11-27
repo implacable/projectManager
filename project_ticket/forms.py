@@ -1,7 +1,7 @@
 from django import forms
-from project_ticket.models import Project
+from django.forms import ModelForm
+from project_ticket.models import Project, Ticket
 from user_auth.models import MyUser
-from project_ticket.models import Ticket
 
 
 class EditInfo(forms.Form):
@@ -16,6 +16,10 @@ class EditPassword(forms.Form):
 	confirm_password = forms.CharField(widget=forms.PasswordInput(), label = "Confirm New Password")
 
 
+class AddComment(forms.Form):
+	comment = forms.CharField(widget=forms.Textarea)
+
+
 class AddTicket(forms.Form):
 	ticket = Ticket()
 	name = forms.CharField(label = "Name")
@@ -23,3 +27,4 @@ class AddTicket(forms.Form):
 	project = forms.ModelChoiceField(queryset=Project.objects.all())
 	developer = forms.ModelMultipleChoiceField(queryset=MyUser.objects.all().filter(perm="developer"))
 	status = forms.ChoiceField(label = 'Ticket Status', choices=ticket.ticket_statuss)
+

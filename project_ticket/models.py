@@ -46,8 +46,10 @@ class Ticket(models.Model):
 		('Completed', 'Completed'),
 		('Back Log', 'Back Log'),
 	)
-
 	status = models.CharField(max_length=32, default='Queued', choices=ticket_statuss)
+
+	def __unicode__(self):
+		return self.name
 
 	def save(self):
 		action = ActionReport()
@@ -72,7 +74,7 @@ class Ticket(models.Model):
 
 # Insert Comment Class here!
 class Comment(models.Model):
-    ticket = models.ForeignKey(Ticket)
+    ticket = models.ForeignKey(Ticket, related_name='comments')
     text = models.TextField(max_length = 1024)
     date_submitted = models.DateTimeField(default = datetime.now)
     recent_user = models.CharField(max_length = 120, default=" ")

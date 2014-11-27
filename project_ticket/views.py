@@ -1,8 +1,9 @@
 from user_auth.forms import LogIn, CreateUser
-from project_ticket.forms import EditInfo, EditPassword, AddTicket
+from project_ticket.forms import (EditInfo, EditPassword, 
+                                  AddTicket, AddComment)
 from project_ticket.models import Project,Ticket,Comment,ActionReport
 from user_auth.models import MyUser
-from project_ticket.models import Project
+from project_ticket.models import Project, Ticket
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
@@ -111,6 +112,49 @@ def project(request, project_id):
     return render(request, 'project_ticket/project.html', {'project':project, 'tickets': all_tickets })
 
 
+@login_required(login_url='login')
+def ticket_detail(request, ticket_id):
+    # A user could actually manually access these tickets right now. Major secruity issue
+    ticket = Ticket.objects.get(pk=ticket_id)
+    new_comment = Comment()
+    user = request.user
+
+    if request.method == 'POST':
+        form = AddComment(request.POST)
+        if form.is_valid():
+            new_comment.text = form.cleaned_data['comment']
+            new_comment.recent_user = user.email
+            new_comment.ticket = ticket
+            new_comment.save()
+            form = AddComment()
+    else:
+        form = AddComment()
+
+
+    project_id = ticket.project.id
+
+    assigned_devs = ticket.developer.all()
+    comments = ticket.comments.all().order_by('-date_submitted')
+    context = { 'ticket':ticket, 
+                'comments': comments, 
+                'form': form,
+                'developers': assigned_devs,
+                'proj_id': project_id }
+    return render(request, 'project_ticket/ticket_detail.html', context)
+
+
+def change_ticket_status(request, ticket_id):
+    ticket = Ticket.objects.get(pk=ticket_id)
+
+    new_status = request.POST.get('status')
+    if new_status == "--":
+        pass
+    else:
+        ticket.recent_user = request.user.email
+        ticket.status = new_status
+        ticket.save()
+
+    return HttpResponseRedirect(reverse('ticket_detail', kwargs={ 'ticket_id':ticket.id }))
 
 @login_required(login_url='login')
 def editprofile(request):
@@ -160,7 +204,7 @@ def addticket(request):
             ticket.save()
             ticket.developer = form.cleaned_data['developer'] # needs to be assigned after ticket.save(why?)
                                                               # ManyToManyField items can't be added to a model until after it's been saved.
-            return HttpResponseRedirect(reverse('profile'))
+            return HttpResponseRedirect(reverse('project', kwargs={ 'project_id':ticket.project.id }))
     else:
         form = AddTicket()
 
