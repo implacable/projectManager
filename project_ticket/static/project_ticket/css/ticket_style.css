@@ -19,13 +19,13 @@
 	padding-right: 10px;
 }
 
-.header form, h2{
-	display: inline-block;
-}
-
 .header form {
 	padding-left: 15px;
 	padding-top: -10px;
+}
+
+.form_wrapper {
+	display: inline-block;
 }
 
 .comments {

@@ -36,17 +36,25 @@
 								<div class="header">
 									<h2> {{ ticket.name }} </h2>
 
-									<form action="{% url 'change_status' ticket_id=ticket.id %}" method="POST">
-										{% csrf_token %}
-										
-										<select name="status">
-											<option value="Queued">Queued</option>
-											<option value="In Progress">In Progress</option>
-											<option value="Testing">Testing</option>
-											<option value="Completed">Completed</option>
-										</select>
 
-										<p><input type="submit" value="Submit" class="btn btn-default"></p>
+
+									<form action="{% url 'change_status' ticket_id=ticket.id %}" method="POST">
+											
+
+										<div class="form_wrapper">
+										{% csrf_token %}
+											<select name="status">
+												<option value="--">--</option>
+												<option value="Queued">Queued</option>
+												<option value="In Progress">In Progress</option>
+												<option value="Testing">Testing</option>
+												<option value="Completed">Completed</option>
+											</select>
+
+											<input type="submit" value="Submit" class="btn btn-default">
+
+										</div>
+										<h5> Ticket Status: {{ ticket.status}} </h5>
 									</form>
 
 								</div>

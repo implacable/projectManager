@@ -20,19 +20,6 @@ class AddComment(forms.Form):
 	comment = forms.CharField(widget=forms.Textarea)
 
 
-ticket_statuss = (
-	('Queued', 'Queued'),
-	('In Progress', 'In Progress'),
-	('Testing', 'Testing'),
-	('Completed', 'Completed'),
-	('Back Log', 'Back Log'),
-)
-
-
-class ChangeStatus(forms.Form):
-	status = forms.ChoiceField(choices=ticket_statuss)
-
-
 class AddTicket(forms.Form):
 	ticket = Ticket()
 	name = forms.CharField(label = "Name")

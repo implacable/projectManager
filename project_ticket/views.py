@@ -1,7 +1,6 @@
 from user_auth.forms import LogIn, CreateUser
 from project_ticket.forms import (EditInfo, EditPassword, 
-                                  AddTicket, AddComment, 
-                                  ChangeStatus)
+                                  AddTicket, AddComment)
 from project_ticket.models import Project,Ticket,Comment,ActionReport
 from user_auth.models import MyUser
 from project_ticket.models import Project, Ticket
@@ -120,8 +119,6 @@ def ticket_detail(request, ticket_id):
     new_comment = Comment()
     user = request.user
 
-    change_status = ChangeStatus()
-
     if request.method == 'POST':
         form = AddComment(request.POST)
         if form.is_valid():
@@ -138,7 +135,6 @@ def ticket_detail(request, ticket_id):
     context = { 'ticket':ticket, 
                 'comments': comments, 
                 'form': form,
-                'change_status': change_status,
                 'developers': assigned_devs }
     return render(request, 'project_ticket/ticket_detail.html', context)
 
@@ -146,9 +142,13 @@ def ticket_detail(request, ticket_id):
 def change_ticket_status(request, ticket_id):
     ticket = Ticket.objects.get(pk=ticket_id)
 
+
     new_status = request.POST.get('status')
-    ticket.status = new_status
-    ticket.save()
+    if new_status == "--":
+        pass
+    else:
+        ticket.status = new_status
+        ticket.save()
 
     return HttpResponseRedirect(reverse('ticket_detail', kwargs={ 'ticket_id':ticket.id }))
 
