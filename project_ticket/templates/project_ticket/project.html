@@ -34,6 +34,7 @@
 					<div class="col-md-3">
 						<div class="content">
 							<h3>Queued</h3>
+							<a href="{% url 'addticket' project_id=project.id %}">(Add)</a>
 							<hr>
 							
 							{% for ticket in tickets %}

@@ -9,7 +9,7 @@ urlpatterns = patterns('',
 	url(r'^change_status/(?P<ticket_id>\d+)/$', views.change_ticket_status, name="change_status"),
 	url(r'^profile$', views.profile, name='profile'),
 	url(r'^editprofile$', views.editprofile, name='editprofile'),
-	url(r'^addticket$', views.addticket, name='addticket'),
+	url(r'^add_ticket/(?P<project_id>\d+)/$', views.addticket, name='addticket'),
 	url(r'^register$', views.register, name='register'),
     url(r'^$', views.login_view, name='login'),
    )
