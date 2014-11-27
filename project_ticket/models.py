@@ -106,8 +106,10 @@ class Comment(models.Model):
 
 
 class ActionReport(models.Model):
-    project = models.ForeignKey(Project, related_name="projects")
+    project = models.ForeignKey(Project, related_name="action_reports")
     message = models.CharField(max_length= 32, default=" ")
+    # Date created is used to order all the recent actions
+    date_created = models.DateTimeField(default = datetime.now)
 
     def save(self):
     	super(ActionReport, self).save()
