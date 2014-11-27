@@ -49,8 +49,9 @@
 					{% for comment in comments %}
 						<div class="comment_buffer"></div>
 						<div class="comment_box">
-							<h3> {{ comment.recent_user }}</h3>
-							<p> {{ comment.text }}</p>
+							<h4> {{ comment.recent_user }}</h4>
+							<h6> {{ comment.text }}</h6>
+							<h6> {{ comment.date_submitted }}</h6>
 						</div>
 						<div class="comment_buffer"></div>
 					{% endfor %}

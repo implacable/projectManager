@@ -65,6 +65,10 @@ hr {
 	margin: 0 auto;
 }
 
+.comment_box h4, h6 {
+	padding-left: 10px;
+}
+
 .comment_buffer {
 	padding-top: 10px;
 }

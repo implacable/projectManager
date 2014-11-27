@@ -129,7 +129,7 @@ def ticket_detail(request, ticket_id):
         form = AddComment()
 
 
-    comments = ticket.comments.all()
+    comments = ticket.comments.all().order_by('-date_submitted')
     context = { 'ticket':ticket, 'comments': comments, 'form': form}
     return render(request, 'project_ticket/ticket_detail.html', context)
 
