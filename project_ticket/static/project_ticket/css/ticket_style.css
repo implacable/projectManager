@@ -9,14 +9,28 @@
 	min-height: 220px;
 }
 
-.ticket_detail h2 {
+.ticket_detail h2, a {
 	padding-left: 10px;
+}
+
+.ticket_detail a {
+	color: #383838;
+	font-size: 20px;
+}
+
+.ticket_detail a:hover {
+	text-decoration: none;
+	color: white;
 }
 
 .ticket_detail p {
 	padding-top: 10px;
 	padding-left: 10px;
 	padding-right: 10px;
+}
+
+.tiny_buffer {
+	padding-top: 15px;
 }
 
 .header form {
@@ -38,6 +52,7 @@
 .comments h2 {
 	padding-left: 10px;
 }
+
 
 .push {
 	padding-top: 10px;

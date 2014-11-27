@@ -36,11 +36,9 @@
 								<div class="header">
 									<h2> {{ ticket.name }} </h2>
 
-
-
+									<a href="{% url 'project' project_id=proj_id %}"> Back to project</a>
+									<div class="tiny_buffer"></div>
 									<form action="{% url 'change_status' ticket_id=ticket.id %}" method="POST">
-											
-
 										<div class="form_wrapper">
 										{% csrf_token %}
 											<select name="status">
