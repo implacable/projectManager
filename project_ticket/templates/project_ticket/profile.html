@@ -8,7 +8,11 @@
 
 {% block 'content' %}
 	<div class="row">
+
+		<div class="small_buffer"></div>
 		
+		<div class="col-md-2"></div>
+
 		<div class="col-md-4 col-xs-12">
 			<div class="account_info">
 				<h3> Account Info: </h3>
@@ -33,29 +37,17 @@
 			</div>
 		</div>
 
-		<div class="col-md-8 col-xs-12">
-			
-			<div class="row">
-				<div class="col-md-12 col-xs-12">
-					<div class="my_projects">
-						<h3> My Projects: </h3>
-						<ol>
-						{% for project in projects %}
-							<li><a href="{% url 'project' project.id %}"> {{ project.name }} </a></li>
-						{% endfor %}
-						</ol>
-					</div>
-				</div>
+		<div class="col-md-4 col-xs-12">
+			<div class="my_projects">
+				<h3> My Projects: </h3>
+				<ul>
+				{% for project in projects %}
+					<li><a href="{% url 'project' project.id %}"> {{ project.name }} </a></li>
+				{% endfor %}
+				</ul>
 			</div>
-
-			<div class="row">
-				<div class="col-md-12 col-xs-12">
-					<div class="activity_feeds">
-						<h3> Activity Feed: </h3>
-					</div>
-				</div>
-			</div>
-		
 		</div>
+
+		<div class="col-md-2"></div>
 	</div>
 {% endblock %}
