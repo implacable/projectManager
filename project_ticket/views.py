@@ -108,8 +108,11 @@ def project(request, project_id):
         return HttpResponseRedirect(reverse('profile'))
 
     all_tickets = project.tickets.all()
+    action_reports = project.action_reports.all().order_by('-date_created')[:6]
+    context = {'project':project, 'tickets': all_tickets, 
+               'action_reports': action_reports }
 
-    return render(request, 'project_ticket/project.html', {'project':project, 'tickets': all_tickets })
+    return render(request, 'project_ticket/project.html', context)
 
 
 @login_required(login_url='login')

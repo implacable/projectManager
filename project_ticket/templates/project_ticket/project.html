@@ -115,6 +115,15 @@
 				<div class="content">
 					<h3>Recent Actions</h3>
 					<hr>
+						
+					
+					{% for action_report in action_reports %}
+					<div class="recent_actions_wrapper">
+						<div class="recent_actions">
+							<p>{{ action_report.message }}</p>
+						</div>
+					</div>
+					{% endfor %}
 				</div>
 			</div>
 		</div>

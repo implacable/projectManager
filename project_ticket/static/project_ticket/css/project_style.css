@@ -55,3 +55,23 @@ hr {
 	color: white;
 	margin: 0 auto;
 }
+
+.recent_actions_wrapper {
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+.recent_actions {
+	width: 97%;
+	margin: 0 auto;
+	min-height: 50px;
+	border-radius: 5px;
+	background-color: #01DDC7; 
+	border: 3px groove #0296db;
+}
+
+.recent_actions p {
+	font-style: italic;
+	padding: 5px;
+	text-align: justify;
+}
