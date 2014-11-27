@@ -1,8 +1,12 @@
 .ticket_detail {
 	border-radius: 10px;
 	background-color: #0296db;
-	min-height: 320px; 
+	min-height: 240px; 
 	border: 3px groove #01DDC7;
+}
+
+.ticket_detail_top {
+	min-height: 220px;
 }
 
 .ticket_detail h2 {
@@ -58,7 +62,7 @@ hr {
 }
 
 .comment_box {
-	width: 97%;
+	width: 98%;
 	background-color: #01DDC7;
 	border: 3px groove #0296db;
 	border-radius: 10px;
