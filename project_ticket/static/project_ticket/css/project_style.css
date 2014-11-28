@@ -8,6 +8,8 @@
 .content h3 {
 	margin-left: 15px;
 	padding-top: 5px;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 600;
 }
 
 .small_buffer {
@@ -68,4 +70,23 @@ hr {
 	font-style: italic;
 	font-size: 12px;
 	color: black;
+}
+
+.add_button {
+
+	position: relative;
+	z-index: 10;
+}
+
+.add_button a {
+	font-size: 18px;
+	padding-left: 15px; 
+	padding-top: 20px;
+	color: black;
+    position: relative;
+    float: left;
+}
+
+.add_button a:hover {
+	color: white;
 }

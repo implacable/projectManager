@@ -5,11 +5,18 @@
 		<link rel="stylesheet" type="text/css" href="{% static 'project_ticket/css/master.css' %}" />
 		<link rel="stylesheet" type="text/css" href="{% static 'project_ticket/css/project_style.css' %}" />
 		<link rel="stylesheet" type="text/css" href="{% static 'project_ticket/css/bootstrap.min.css' %}" />
-		
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	</head>
 	<body>
 		<div class="full_nav">
 			{% if user.is_authenticated %}
+			
+			<div class="add_button">
+				<a href="{% url 'addticket' project_id=project.id %}">
+					<i class="fa fa-plus fa-lg"></i>
+				</a>
+			</div>
+
 			<ul class="navbar">
 				<li><a href="{% url 'logout' %}"> Logout </a>
 				<li><a href="{% url 'profile' %}"> Profile </a></li>
@@ -33,7 +40,7 @@
 				<div class="row">
 					<div class="col-md-3">
 						<div class="content">
-							<h3>Queued</h3>
+							<h3>Queued</h3>	
 							<hr>
 							
 							{% for ticket in tickets %}

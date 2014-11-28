@@ -193,7 +193,7 @@ def editprofile(request):
 
 
 @login_required(login_url='login')
-def addticket(request):
+def addticket(request, project_id):
     user = request.user
     ticket = Ticket()
     if request.method == 'POST':
@@ -202,7 +202,7 @@ def addticket(request):
             ticket.name = form.cleaned_data['name']
             ticket.description_ticket = form.cleaned_data['description']
             ticket.recent_user = user.email
-            ticket.project = form.cleaned_data['project']
+            ticket.project = Project.objects.get(pk=project_id)
             ticket.status = form.cleaned_data['status']
             ticket.save()
             ticket.developer = form.cleaned_data['developer'] # needs to be assigned after ticket.save(why?)
@@ -211,7 +211,9 @@ def addticket(request):
     else:
         form = AddTicket()
 
-    return render(request, 'project_ticket/addticket.html', {'form':form, 'user':request.user})
+    context = {'form':form, 'user':request.user, 'proj_id': project_id}
+
+    return render(request, 'project_ticket/addticket.html', context)
 
 def register(request):
     """
