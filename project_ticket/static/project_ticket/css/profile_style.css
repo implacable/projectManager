@@ -71,3 +71,17 @@ hr {
 .small_buffer {
 	padding-top: 10px;
 }
+
+.projects_header h3, a {
+    display: inline-block;
+}
+
+.projects_header a {
+    color: #383838;
+    padding-left: 5px;
+    font-size: 22px;
+}
+
+.projects_header a:hover {
+    color: white;
+}

@@ -1,6 +1,7 @@
 from user_auth.forms import LogIn, CreateUser
 from project_ticket.forms import (EditInfo, EditPassword, 
-                                  AddTicket, AddComment)
+                                  AddTicket, AddComment,
+                                  AddProject)
 from project_ticket.models import Project,Ticket,Comment,ActionReport
 from user_auth.models import MyUser
 from project_ticket.models import Project, Ticket
@@ -114,7 +115,6 @@ def project(request, project_id):
 
     return render(request, 'project_ticket/project.html', context)
 
-
 @login_required(login_url='login')
 def ticket_detail(request, ticket_id):
     # A user could actually manually access these tickets right now. Major secruity issue
@@ -145,7 +145,7 @@ def ticket_detail(request, ticket_id):
                 'proj_id': project_id }
     return render(request, 'project_ticket/ticket_detail.html', context)
 
-
+@login_required(login_url='login')
 def change_ticket_status(request, ticket_id):
     ticket = Ticket.objects.get(pk=ticket_id)
 
@@ -191,6 +191,29 @@ def editprofile(request):
 
     return render(request, 'project_ticket/editprofile.html', {'form':form, 'form2':form2, 'user': request.user})
 
+@login_required(login_url='login')
+def add_project(request):
+    user = request.user
+    proj = Project()
+    if request.method == 'POST':
+        form = AddProject(request.POST)
+        if form.is_valid():
+            proj.name = form.cleaned_data['name']
+            proj.description = form.cleaned_data['description']
+            proj.recent_user = user.email
+
+            client = form.cleaned_data['client']
+            proj.client = client
+            proj.save()
+
+            proj.developer = form.cleaned_data['developer']
+            proj.project_manager = form.cleaned_data['project_manager']
+            return HttpResponseRedirect(reverse('project', kwargs={ 'project_id': proj.id }))
+    else:
+        form = AddProject()
+
+    return render(request, 'project_ticket/add_project.html', { 'form': form })
+
 
 @login_required(login_url='login')
 def addticket(request, project_id):
@@ -207,6 +230,7 @@ def addticket(request, project_id):
             ticket.save()
             ticket.developer = form.cleaned_data['developer'] # needs to be assigned after ticket.save(why?)
                                                               # ManyToManyField items can't be added to a model until after it's been saved.
+
             return HttpResponseRedirect(reverse('project', kwargs={ 'project_id':ticket.project.id }))
     else:
         form = AddTicket()

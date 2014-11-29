@@ -3,6 +3,7 @@
 {% block 'styling' %}
 {% load staticfiles %}
 	<link rel="stylesheet" type="text/css" href="{% static 'project_ticket/css/profile_style.css' %}" />
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 {% endblock %}
 
 
@@ -39,7 +40,14 @@
 
 		<div class="col-md-4 col-xs-12">
 			<div class="my_projects">
-				<h3> My Projects: </h3>
+				
+				<div class="projects_header">                  
+                    <h3> My Projects: </h3>
+                    <a href="{% url 'add_project' %}">
+                        <i class="fa fa-plus fa-lg"></i>
+                    </a>
+                </div>
+
 				<ul>
 				{% for project in projects %}
 					<li><a href="{% url 'project' project.id %}"> {{ project.name }} </a></li>
