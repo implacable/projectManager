@@ -1,0 +1,59 @@
+{% extends 'project_ticket/base.html' %}
+
+{% block 'styling' %}
+{% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'project_ticket/css/add_ticket_style.css' %}" />
+{% endblock %}
+
+{% block 'content' %}
+        <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            
+            <div class="add_ticket">
+                <form action='{{ request.path }}' method="POST" enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+                <div class="fieldWrapper">
+                    <p>{{form.name.errors}}</p>
+                    <p><label for="name">Project name:</label></p>
+                    <p>{{form.name}}</p>
+                </div>
+
+                <div class="fieldWrapper">
+                    <p>{{form.description.errors}}</p>
+                    <p><label for="description">Description:</label></p>
+                    <p>{{form.description}}</p>
+                </div>
+
+                <div class="fieldWrapper">
+                    <p>{{form.client.errors}}</p>
+                    <p><label for="client">Client:</label></p>
+                    <p><i> Client must not be on a project already </i><p>
+                    <p>{{form.client}}</p>
+                </div>
+
+                <div class="fieldWrapper">
+                    <p>{{form.project_manager.errors}}</p>
+                    <p><label for="project_manager">Project Manager:</label></p>
+                    <p>{{form.project_manager}}</p>
+                </div>
+
+                <div class="fieldWrapper">
+                    <p>{{form.developer.errors}}</p>
+                    <p><label for="developer">Developer:</label></p>
+                    <p>{{form.developer}}</p>
+                </div>
+
+                <p><p align="center">
+                    <input type="submit" value="Save" class="btn btn-default">
+                </p></p>
+                
+                </form>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+        </div>
+    </div>
+{% endblock %}

@@ -50,7 +50,7 @@
 
 				<ul>
 				{% for project in projects %}
-					<li><a href="{% url 'project' project.id %}"> {{ project.name }} </a></li>
+					<div class="edit"><li><a href="{% url 'project' project.id %}"> {{ project.name }} </a><a href="{% url 'edit_project' project_id=project.id %}"><i class="fa fa-pencil"></i></a></li></div>
 				{% endfor %}
 				</ul>
 			</div>
@@ -59,3 +59,8 @@
 		<div class="col-md-2"></div>
 	</div>
 {% endblock %}
+<div class="edit">
+				<a href="{% url 'edit_project' project_id=project.id %}">
+					<i class="fa fa-pencil"></i>
+				</a>
+			</div>
