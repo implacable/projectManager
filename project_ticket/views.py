@@ -246,6 +246,36 @@ def addticket(request, project_id):
 
     return render(request, 'project_ticket/addticket.html', context)
 
+
+@login_required(login_url='login')
+def edit_ticket(request, ticket_id):
+    user = request.user
+    ticket = get_object_or_404(Ticket, id=ticket_id)
+    if request.method == 'POST':
+        form = AddTicket(request.POST)
+        if form.is_valid():
+            ticket.name = form.cleaned_data['name']
+            ticket.description_ticket = form.cleaned_data['description']
+            ticket.recent_user = user.email
+            ticket.status = form.cleaned_data['status']
+            ticket.save()
+            ticket.developer = form.cleaned_data['developer']
+
+            return HttpResponseRedirect(reverse('project', kwargs={ 'project_id':ticket.project.id }))
+    else:
+        form = AddTicket(
+            initial={
+                'name': ticket.name,
+                'description': ticket.description_ticket,
+                'developer': ticket.developer.all(),
+                'status': ticket.status,
+            })
+
+    context = {'form':form, 'user':request.user }
+
+    return render(request, 'project_ticket/edit_ticket.html', context)
+
+
 def register(request):
     """
     If the request method is post then a MyUser object 
