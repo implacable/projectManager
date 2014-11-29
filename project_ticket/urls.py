@@ -11,6 +11,7 @@ urlpatterns = patterns('',
 	url(r'^editprofile$', views.editprofile, name='editprofile'),
 	url(r'^add_project$', views.add_project, name="add_project"),
 	url(r'^add_ticket/(?P<project_id>\d+)/$', views.addticket, name='addticket'),
+	url(r'^delete_ticket/(?P<ticket_id>\d+)/$', views.delete_ticket, name='delete_ticket'),
 	url(r'^register$', views.register, name='register'),
     url(r'^$', views.login_view, name='login'),
    )

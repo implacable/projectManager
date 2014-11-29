@@ -160,6 +160,13 @@ def change_ticket_status(request, ticket_id):
     return HttpResponseRedirect(reverse('ticket_detail', kwargs={ 'ticket_id':ticket.id }))
 
 @login_required(login_url='login')
+def delete_ticket(request, ticket_id):
+    ticket = get_object_or_404(Ticket, id=ticket_id)
+    ticket.delete()
+    project_id = ticket.project.id
+    return HttpResponseRedirect(reverse('project', kwargs={ 'project_id': project_id }))
+
+@login_required(login_url='login')
 def editprofile(request):
     user = request.user
     if request.method == 'POST':

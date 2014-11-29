@@ -5,6 +5,7 @@
 		<link rel="stylesheet" type="text/css" href="{% static 'project_ticket/css/master.css' %}" />
 		<link rel="stylesheet" type="text/css" href="{% static 'project_ticket/css/bootstrap.min.css' %}" />	
 		<link rel="stylesheet" type="text/css" href="{% static 'project_ticket/css/ticket_style.css' %}" />
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 		<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.3/angular.min.js"></script>
 		<script src="{% static 'project_ticket/js/controllers.js' %}"></script>
 	</head>
@@ -36,7 +37,31 @@
 								<div class="header">
 									<h2> {{ ticket.name }} </h2>
 
-									<a href="{% url 'project' project_id=proj_id %}"> Back to project</a>
+
+									<!-- <div class="btn-group" role="group">
+										<button type="button" class="btn btn-default">
+											<a href="{% url 'delete_ticket' ticket_id=ticket.id %}"><i class="fa fa-times"></i></a>
+										</button>
+								    	<button type="button" class="btn btn-default">
+								    		<a href=""><i class="fa fa-pencil"></i></a>
+								    	</button>
+										<button type="button" class="btn btn-default">
+											<a href="{% url 'project' project_id=proj_id %}"> <i class="fa fa-reply"></i></a>
+										</button>
+									</div> -->
+
+									<div class="btn-group vader" role="group">
+										<a href="{% url 'delete_ticket' ticket_id=ticket.id %}">
+											<button type="button" class="btn btn-default"><i class="fa fa-times"></i></button>
+										</a>
+										<a href="">
+									    	<button type="button" class="btn btn-default"><i class="fa fa-pencil"></i></button>
+										</a>
+										<a href="{% url 'project' project_id=proj_id %}"> 
+										  <button type="button" class="btn btn-default"><i class="fa fa-reply"></i></button>
+										</a>
+									</div>
+
 									<div class="tiny_buffer"></div>
 									<form action="{% url 'change_status' ticket_id=ticket.id %}" method="POST">
 										<div class="form_wrapper">
