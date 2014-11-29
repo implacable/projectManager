@@ -9,18 +9,8 @@
 	min-height: 220px;
 }
 
-.ticket_detail h2, a {
+.ticket_detail h2, .vader {
 	padding-left: 10px;
-}
-
-.ticket_detail a {
-	color: #383838;
-	font-size: 20px;
-}
-
-.ticket_detail a:hover {
-	text-decoration: none;
-	color: white;
 }
 
 .ticket_detail p {
