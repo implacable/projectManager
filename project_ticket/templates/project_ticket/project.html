@@ -42,19 +42,21 @@
 						<div class="content">
 							<h3>Queued</h3>	
 							<hr>
-							
-							{% for ticket in tickets %}
-								{% if ticket.status == "Queued" %}
-								<div class="ticket_wrapper">
-									<a href="{% url 'ticket_detail' ticket.id %}">
-										<div class="ticket">
-											<p> {{ ticket.name }} </p>
-										</div>
-									</a>
-								</div>
-								{% endif %}
-							{% endfor %}
-						
+
+							<div class="subfolder">
+								{% for ticket in tickets %}
+									{% if ticket.status == "Queued" %}
+									<div class="ticket_wrapper">
+										<a href="{% url 'ticket_detail' ticket.id %}">
+											<div class="ticket">
+												<p> {{ ticket.name }} </p>
+											</div>
+										</a>
+									</div>
+									{% endif %}
+								{% endfor %}
+							</div>
+
 						</div>
 					</div>
 					<div class="col-md-3">
@@ -62,19 +64,20 @@
 							<h3>In Progress</h3>
 							<hr>
 
-							{% for ticket in tickets %}
-							<!-- Todo: This if might break due to some changes Juan made -->
-								{% if ticket.status == "In Progress" %}
-								<div class="ticket_wrapper">
-									<a href="{% url 'ticket_detail' ticket.id %}">
-										<div class="ticket">
-											<p> {{ ticket.name }} </p>
-										</div>
-									</a>
-								</div>
-								{% endif %}
-							{% endfor %}
-
+							<div class="subfolder">
+								{% for ticket in tickets %}
+								<!-- Todo: This if might break due to some changes Juan made -->
+									{% if ticket.status == "In Progress" %}
+									<div class="ticket_wrapper">
+										<a href="{% url 'ticket_detail' ticket.id %}">
+											<div class="ticket">
+												<p> {{ ticket.name }} </p>
+											</div>
+										</a>
+									</div>
+									{% endif %}
+								{% endfor %}
+							</div>
 						</div>
 					</div>
 					<div class="col-md-3">
@@ -82,17 +85,19 @@
 							<h3>Testing</h3>
 							<hr>
 
-							{% for ticket in tickets %}
-								{% if ticket.status == "Testing" %}
-								<div class="ticket_wrapper">
-									<a href="{% url 'ticket_detail' ticket.id %}">
-										<div class="ticket">
-											<p> {{ ticket.name }} </p>
-										</div>
-									</a>
-								</div>
-								{% endif %}
-							{% endfor %}
+							<div class="subfolder">
+								{% for ticket in tickets %}
+									{% if ticket.status == "Testing" %}
+									<div class="ticket_wrapper">
+										<a href="{% url 'ticket_detail' ticket.id %}">
+											<div class="ticket">
+												<p> {{ ticket.name }} </p>
+											</div>
+										</a>
+									</div>
+									{% endif %}
+								{% endfor %}
+							</div>
 
 						</div>
 					</div>
@@ -101,17 +106,19 @@
 							<h3>Completed</h3>
 							<hr>
 
-							{% for ticket in tickets %}
-								{% if ticket.status == "Completed" %}
-								<div class="ticket_wrapper">
-									<a href="{% url 'ticket_detail' ticket.id %}">
-										<div class="ticket">
-											<p> {{ ticket.name }} </p>
-										</div>
-									</a>
-								</div>
-								{% endif %}
-							{% endfor %}
+							<div class="subfolder">
+								{% for ticket in tickets %}
+									{% if ticket.status == "Completed" %}
+									<div class="ticket_wrapper">
+										<a href="{% url 'ticket_detail' ticket.id %}">
+											<div class="ticket">
+												<p> {{ ticket.name }} </p>
+											</div>
+										</a>
+									</div>
+									{% endif %}
+								{% endfor %}
+							</div>
 
 						</div>
 					</div>
@@ -122,13 +129,17 @@
 				<div class="content">
 					<h3>Recent Actions</h3>
 					<hr>
-					<div class="act_reports"> 
-						<ul>
-						{% for action_report in action_reports %}
-								<li><p>{{ action_report.message }}</p></li>
-						{% endfor %}
-						</ul>
+
+					<div class="subfolder">
+						<div class="act_reports"> 
+							<ul>
+							{% for action_report in action_reports %}
+									<li><p>{{ action_report.message }}</p></li>
+							{% endfor %}
+							</ul>
+						</div>
 					</div>
+					
 				</div>
 			</div>
 		</div>
