@@ -57,7 +57,7 @@ class Ticket(models.Model):
 		if self.pk is not None:
 			old = Ticket.objects.get(pk=self.pk)
 			if old.status.lower() != self.status.lower():
-				verb = "%s changed %s from %s to %s on " % (self.recent_user,self.name, old.status, self.status)
+				verb = "%s moved %s from %s to %s on " % (self.recent_user,self.name, old.status, self.status)
 				action.message = verb + "%s" % (datetime.now()).strftime(" %B %d, %Y at %H:%M")
 				action.save()
 			if old.name.lower() != self.name.lower() or old.description_ticket.lower() != self.description_ticket.lower():

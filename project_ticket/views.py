@@ -223,6 +223,37 @@ def add_project(request):
 
 
 @login_required(login_url='login')
+def edit_project(request, project_id):
+    user = request.user
+    project = get_object_or_404(Project, id=project_id)
+    if request.method == 'POST':
+        form = AddProject(request.POST)
+        if form.is_valid():
+            project.name = form.cleaned_data['name']
+            project.description = form.cleaned_data['description']
+            project.recent_user = user.email
+            client = form.cleaned_data['client']
+            project.client = client
+            project.save()
+            project.developer = form.cleaned_data['developer']
+            project.project_manager = form.cleaned_data['project_manager']
+            return HttpResponseRedirect(reverse('project', kwargs={ 'project_id':project.id }))
+    else:
+        form = AddProject(
+            initial={
+                'name': project.name,
+                'description': project.description,
+                'client': project.client,
+                'project_manager': project.project_manager.all(),
+                'developer': project.developer.all(),
+            })
+
+    context = {'form':form, 'user':request.user }
+
+    return render(request, 'project_ticket/edit_project.html', context)
+
+
+@login_required(login_url='login')
 def addticket(request, project_id):
     user = request.user
     ticket = Ticket()
