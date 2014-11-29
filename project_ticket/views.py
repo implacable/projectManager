@@ -109,7 +109,7 @@ def project(request, project_id):
         return HttpResponseRedirect(reverse('profile'))
 
     all_tickets = project.tickets.all()
-    action_reports = project.action_reports.all().order_by('-date_created')[:10]
+    action_reports = project.action_reports.all().order_by('-date_created')
     context = {'project':project, 'tickets': all_tickets, 
                'action_reports': action_reports }
 
