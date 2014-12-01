@@ -1,0 +1,46 @@
+{% extends 'project_ticket/base.html' %}
+{% block 'content' %}
+	<div class="row">
+		<div class="col-md-4 col-xs-4"></div>
+		<div class="col-md-4 col-xs-4">
+			<div class="register"> 
+				<form action="{{ request.path }}" method="POST">
+	                {% csrf_token %}
+	                <div class="fieldWrapper">
+		                <p>{{ form.first_name.errors }}<p/>
+		                <p><label for="email">First name:</label></p>
+		                <p> {{ form.first_name }} </p>
+	                </div>
+
+	                <div class="fieldWrapper">
+		                <p>{{ form.last_name.errors }}<p/>
+		                <p><label for="email">Last name:</label></p>
+		                <p> {{ form.last_name }} </p>
+	                </div>
+
+	                <div class="fieldWrapper">
+		                <p>{{ form.email.errors }}<p/>
+		                <p><label for="email">Email address:</label></p>
+		                <p> {{ form.email }} </p>
+	                </div>
+
+	                <div class="fieldWrapper">
+		                <p>{{ form.password.errors }}</p>
+		                <p><label for="password">Password:</label></p>
+		                <p>{{ form.password }}<p/>
+	                </div>
+
+	                <div class="fieldWrapper">
+		                <p>{{ form.password_confirmation.errors }}</p>
+		                <p><label for="password">Password confirmation:</label></p>
+		                <p>{{ form.password_confirmation }}<p/>
+	                </div>
+	                <p><input type="submit" value="Submit"></p>
+            	</form>
+			</div>
+		</div>
+		<div class="col-md-4 col-xs-4"></div>
+	</div>
+{% endblock %}
+
+

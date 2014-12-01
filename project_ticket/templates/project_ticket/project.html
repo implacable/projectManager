@@ -1,0 +1,149 @@
+<html>
+	<head>
+		{% load staticfiles %}
+		<link href='http://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" type="text/css" href="{% static 'project_ticket/css/master.css' %}" />
+		<link rel="stylesheet" type="text/css" href="{% static 'project_ticket/css/project_style.css' %}" />
+		<link rel="stylesheet" type="text/css" href="{% static 'project_ticket/css/bootstrap.min.css' %}" />
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	</head>
+	<body>
+		<div class="full_nav">
+			{% if user.is_authenticated %}
+			
+			<div class="add_button">
+				<a href="{% url 'addticket' project_id=project.id %}">
+					<i class="fa fa-plus fa-lg"></i>
+				</a>
+			</div>
+
+			<ul class="navbar">
+				<li><a href="{% url 'logout' %}"> Logout </a>
+				<li><a href="{% url 'profile' %}"> Profile </a></li>
+				<li><a href="{% url 'home' %}"> Home </a></li>
+			</ul>
+			{% else %}
+			<ul class="navbar">
+				<li><a href="{% url 'login' %}"> Login </a></li>
+				<li><a href="{% url 'register' %}"> Register </a></li>
+				<li><a href="{% url 'home' %}"> Home </a></li>
+			</ul>
+			{% endif %}
+		</div>
+
+		<div class="small_buffer"></div>
+
+		<div class="small_wrapper">
+
+		<div class="row">
+			<div class="col-md-9">
+				<div class="row">
+					<div class="col-md-3">
+						<div class="content">
+							<h3>Queued</h3>	
+							<hr>
+
+							<div class="subfolder">
+								{% for ticket in tickets %}
+									{% if ticket.status == "Queued" %}
+									<div class="ticket_wrapper">
+										<a href="{% url 'ticket_detail' ticket.id %}">
+											<div class="ticket">
+												<p> {{ ticket.name }} </p>
+											</div>
+										</a>
+									</div>
+									{% endif %}
+								{% endfor %}
+							</div>
+
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="content">
+							<h3>In Progress</h3>
+							<hr>
+
+							<div class="subfolder">
+								{% for ticket in tickets %}
+								<!-- Todo: This if might break due to some changes Juan made -->
+									{% if ticket.status == "In Progress" %}
+									<div class="ticket_wrapper">
+										<a href="{% url 'ticket_detail' ticket.id %}">
+											<div class="ticket">
+												<p> {{ ticket.name }} </p>
+											</div>
+										</a>
+									</div>
+									{% endif %}
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="content">
+							<h3>Testing</h3>
+							<hr>
+
+							<div class="subfolder">
+								{% for ticket in tickets %}
+									{% if ticket.status == "Testing" %}
+									<div class="ticket_wrapper">
+										<a href="{% url 'ticket_detail' ticket.id %}">
+											<div class="ticket">
+												<p> {{ ticket.name }} </p>
+											</div>
+										</a>
+									</div>
+									{% endif %}
+								{% endfor %}
+							</div>
+
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="content">
+							<h3>Completed</h3>
+							<hr>
+
+							<div class="subfolder">
+								{% for ticket in tickets %}
+									{% if ticket.status == "Completed" %}
+									<div class="ticket_wrapper">
+										<a href="{% url 'ticket_detail' ticket.id %}">
+											<div class="ticket">
+												<p> {{ ticket.name }} </p>
+											</div>
+										</a>
+									</div>
+									{% endif %}
+								{% endfor %}
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-md-3">
+				<div class="content">
+					<h3>Recent Actions</h3>
+					<hr>
+
+					<div class="subfolder">
+						<div class="act_reports"> 
+							<ul>
+							{% for action_report in action_reports %}
+									<li><p>{{ action_report.message }}</p></li>
+							{% endfor %}
+							</ul>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+
+		</div>
+	</body>
+</html>

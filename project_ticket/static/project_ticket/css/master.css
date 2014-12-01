@@ -1,0 +1,116 @@
+* {
+    margin: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+.full_nav {
+    border-bottom: 3px solid #01DDC7;
+	background-color: #0296db;
+	display: block;
+	width: 100%;
+    position:relative;
+    height:60px;
+}
+
+.navbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar li {
+    display: inline;
+    position: relative;
+    float: right;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.navbar a {
+    font-weight: 600;
+	font-size: 25px;
+	font-family: 'Roboto', sans-serif;
+	text-decoration: none;
+	line-height:58px;
+	color: black;
+}
+
+.navbar a:hover {
+    color: white;
+	text-decoration: none;
+}
+
+.wrapper {
+	width: 90%;
+    min-height: 100%;
+    max-width: 960px;
+    margin: 0 auto -60px;
+    display: block;
+    position: relative;
+}
+
+.footer, .push {
+    border-top: 3px solid #01DDC7;
+	background-color: #0296db;
+	display: block;
+    height:60px;
+    width:100%;
+	position:absolute;
+	bottom:0;
+	left:0;
+}
+
+.login {
+    /*
+    Making the screen smaller then half way causes
+    the form to display out of the div
+    min-width does not work
+    */
+    margin-top: 25px;
+    background-color: #0296db;
+    min-height: 100px;
+    border: 3px groove #01DDC7;
+    border-radius: 10px;
+}
+
+.login p {
+    margin: auto;
+    text-align: center;
+    padding: 1px;
+}
+
+.register {
+    /*
+    Making the screen smaller then half way causes
+    the form to display out of the div
+    min-width does not work
+    */
+    margin-top: 25px;
+    background-color: #0296db;
+    min-height: 100px;
+    border: 3px groove #01DDC7;
+    border-radius: 10px;
+}
+
+.register p {
+    margin: auto;
+    text-align: center;
+    padding: 1px;
+}
+
+.editprofile {
+    margin-top: 25px;
+    background-color: #0296db;
+    min-height: 100px;
+    border: 3px groove #01DDC7;
+    border-radius: 10px;
+}
+
+.editprofile p {
+    margin: auto;
+    text-align: center;
+    padding: 1px;
+}

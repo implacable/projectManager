@@ -1,5 +1,9 @@
 # Created by https://www.gitignore.io
 
+### VIM###
+
+*.*.swp
+*.*.*.swp
 ### Python ###
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -50,6 +54,7 @@ coverage.xml
 
 # Django stuff:
 *.log
+*.sqlite3
 
 # Sphinx documentation
 docs/_build/
@@ -163,3 +168,4 @@ $RECYCLE.BIN/
 
 # KDE directory preferences
 .directory
+db.sqlite3

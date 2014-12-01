@@ -1,0 +1,113 @@
+.content {
+	border-radius: 10px;
+	background-color: #0296db;
+	height: 680px; 
+	border: 3px groove #01DDC7;
+}
+
+.subfolder {
+	margin-top: -13px;
+	height: 593px;
+	overflow-y: auto;
+	overflow-x: none;
+}
+
+.content h3 {
+	margin-left: 15px;
+	padding-top: 5px;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 600;
+}
+
+.small_buffer {
+	width: 100%;
+	height: 10px;
+}
+
+.small_wrapper {
+	width: 99%;
+	margin: 0 auto;
+    display: block;
+    position: relative;
+}
+
+.ticket_wrapper {
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+.ticket_wrapper a:hover {
+	text-decoration: none;
+}
+
+.ticket {
+	width: 97%;
+	margin: 0 auto;
+	min-height: 50px;
+	border-radius: 5px;
+	background-color: #01DDC7; 
+	border: 3px groove #0296db;
+}
+
+.ticket p {
+	text-decoration: none;
+	color: #383838;
+	margin-left: 5px;
+}
+
+a:hover .ticket {
+	opacity: 0.75;
+	background-color: #01DDC7; 
+}
+
+hr {
+	color: white;
+	margin: 0 auto;
+}
+
+.act_reports ul {
+	padding-right: 7px;
+}
+
+.act_reports li {
+	padding-top: 3px;
+}
+
+.act_reports ul li p {
+	font-style: italic;
+	font-size: 14px;
+	color: black;
+}
+
+.add_button {
+
+	position: relative;
+	z-index: 10;
+}
+
+.add_button a {
+	font-size: 18px;
+	padding-left: 15px; 
+	padding-top: 20px;
+	color: black;
+    position: relative;
+    float: left;
+}
+
+.add_button a:hover {
+	color: white;
+}
+
+.subfolder::-webkit-scrollbar {
+    width: 7px;
+}
+ 
+.subfolder::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.5); 
+    border-radius: 10px;
+}
+ 
+.subfolder::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,1); 
+}
