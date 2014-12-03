@@ -9,7 +9,7 @@ class EditInfo(forms.Form):
     lastname = forms.CharField(label = "Last Name")
     email = forms.EmailField(label = "Email")
 
-	
+
 class EditPassword(forms.Form):
 	old_password = forms.CharField(widget=forms.PasswordInput(), label = "Old Password")
 	new_password = forms.CharField(widget=forms.PasswordInput(), label = "New Password")
@@ -24,7 +24,8 @@ class AddTicket(forms.Form):
 	ticket = Ticket()
 	name = forms.CharField(label = "Name")
 	description = forms.CharField(label = "Description", widget = forms.Textarea)
-	developer = forms.ModelMultipleChoiceField(queryset=MyUser.objects.filter(perm="developer"))
+	project = forms.ModelChoiceField(queryset=Project.objects.all())
+	developer = forms.ModelMultipleChoiceField(queryset=MyUser.objects.all().filter(perm="developer"))
 	status = forms.ChoiceField(label = 'Ticket Status', choices=ticket.ticket_statuss)
 
 
