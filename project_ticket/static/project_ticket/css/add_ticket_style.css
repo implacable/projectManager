@@ -1,0 +1,14 @@
+.add_ticket {
+	margin-top: 25px;
+    background-color: #0296db;
+    width: 400px;
+    min-height: 100px;
+    border: 3px groove #01DDC7;
+    border-radius: 10px;
+}
+
+.add_ticket p {
+    margin: auto;
+    text-align: center;
+    padding: 2px;
+}

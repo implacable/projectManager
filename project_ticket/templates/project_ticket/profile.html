@@ -3,12 +3,17 @@
 {% block 'styling' %}
 {% load staticfiles %}
 	<link rel="stylesheet" type="text/css" href="{% static 'project_ticket/css/profile_style.css' %}" />
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 {% endblock %}
 
 
 {% block 'content' %}
 	<div class="row">
+
+		<div class="small_buffer"></div>
 		
+		<div class="col-md-2"></div>
+
 		<div class="col-md-4 col-xs-12">
 			<div class="account_info">
 				<h3> Account Info: </h3>
@@ -33,29 +38,29 @@
 			</div>
 		</div>
 
-		<div class="col-md-8 col-xs-12">
-			
-			<div class="row">
-				<div class="col-md-12 col-xs-12">
-					<div class="my_projects">
-						<h3> My Projects: </h3>
-						<ol>
-						{% for project in projects %}
-							<li><a href="{% url 'project' project.id %}"> {{ project.name }} </a></li>
-						{% endfor %}
-						</ol>
-					</div>
-				</div>
-			</div>
+		<div class="col-md-4 col-xs-12">
+			<div class="my_projects">
+				
+				<div class="projects_header">                  
+                    <h3> My Projects: </h3>
+                    <a href="{% url 'add_project' %}">
+                        <i class="fa fa-plus fa-lg"></i>
+                    </a>
+                </div>
 
-			<div class="row">
-				<div class="col-md-12 col-xs-12">
-					<div class="activity_feeds">
-						<h3> Activity Feed: </h3>
-					</div>
-				</div>
+				<ul>
+				{% for project in projects %}
+					<div class="edit"><li><a href="{% url 'project' project.id %}"> {{ project.name }} </a><a href="{% url 'edit_project' project_id=project.id %}"><i class="fa fa-pencil"></i></a></li></div>
+				{% endfor %}
+				</ul>
 			</div>
-		
 		</div>
+
+		<div class="col-md-2"></div>
 	</div>
 {% endblock %}
+<div class="edit">
+				<a href="{% url 'edit_project' project_id=project.id %}">
+					<i class="fa fa-pencil"></i>
+				</a>
+			</div>

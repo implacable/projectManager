@@ -2,6 +2,7 @@
 	border-radius: 10px;
 	background-color: #0296db;
 	min-height: 630px;
+	border: 3px groove #01DDC7;
 }
 
 .account_info p {
@@ -9,6 +10,7 @@
 	padding-right: 5px;
 	padding-bottom: 5px;
 	padding-top: 5px;
+	font-size: 18px;
 }
 
 .account_info h3 {
@@ -25,7 +27,8 @@
 .my_projects {
 	border-radius: 10px;
 	background-color: #0296db;
-	min-height: 300px;
+	min-height: 630px;
+	border: 3px groove #01DDC7;
 }
 
 .my_projects h3 {
@@ -47,7 +50,10 @@
 	padding-bottom: 5px;
 	padding-top: 5px;
 	color: #383838;
-	font-size: 30px;
+}
+
+.my_projects li {
+	font-size: 25px;
 }
 
 .my_projects a:hover {
@@ -60,4 +66,22 @@ hr {
 	width: 90%;
 	padding: 10px;
 	margin: 0 auto;
+}
+
+.small_buffer {
+	padding-top: 10px;
+}
+
+.projects_header h3, a {
+    display: inline-block;
+}
+
+.projects_header a {
+    color: #383838;
+    padding-left: 5px;
+    font-size: 22px;
+}
+
+.projects_header a:hover {
+    color: white;
 }

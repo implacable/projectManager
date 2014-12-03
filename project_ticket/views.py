@@ -1,8 +1,10 @@
 from user_auth.forms import LogIn, CreateUser
-from project_ticket.forms import EditInfo, EditPassword, AddTicket
+from project_ticket.forms import (EditInfo, EditPassword, 
+                                  AddTicket, AddComment,
+                                  AddProject)
 from project_ticket.models import Project,Ticket,Comment,ActionReport
 from user_auth.models import MyUser
-from project_ticket.models import Project
+from project_ticket.models import Project, Ticket
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
@@ -107,10 +109,62 @@ def project(request, project_id):
         return HttpResponseRedirect(reverse('profile'))
 
     all_tickets = project.tickets.all()
+    action_reports = project.action_reports.all().order_by('-date_created')
+    context = {'project':project, 'tickets': all_tickets, 
+               'action_reports': action_reports }
 
-    return render(request, 'project_ticket/project.html', {'project':project, 'tickets': all_tickets })
+    return render(request, 'project_ticket/project.html', context)
+
+@login_required(login_url='login')
+def ticket_detail(request, ticket_id):
+    # A user could actually manually access these tickets right now. Major secruity issue
+    ticket = Ticket.objects.get(pk=ticket_id)
+    new_comment = Comment()
+    user = request.user
+
+    if request.method == 'POST':
+        form = AddComment(request.POST)
+        if form.is_valid():
+            new_comment.text = form.cleaned_data['comment']
+            new_comment.recent_user = user.email
+            new_comment.ticket = ticket
+            new_comment.save()
+            form = AddComment()
+    else:
+        form = AddComment()
 
 
+    project_id = ticket.project.id
+
+    assigned_devs = ticket.developer.all()
+    comments = ticket.comments.all().order_by('-date_submitted')
+    context = { 'ticket':ticket, 
+                'comments': comments, 
+                'form': form,
+                'developers': assigned_devs,
+                'proj_id': project_id }
+    return render(request, 'project_ticket/ticket_detail.html', context)
+
+@login_required(login_url='login')
+def change_ticket_status(request, ticket_id):
+    ticket = Ticket.objects.get(pk=ticket_id)
+
+    new_status = request.POST.get('status')
+    if new_status == "--":
+        pass
+    else:
+        ticket.recent_user = request.user.email
+        ticket.status = new_status
+        ticket.save()
+
+    return HttpResponseRedirect(reverse('ticket_detail', kwargs={ 'ticket_id':ticket.id }))
+
+@login_required(login_url='login')
+def delete_ticket(request, ticket_id):
+    ticket = get_object_or_404(Ticket, id=ticket_id)
+    ticket.delete()
+    project_id = ticket.project.id
+    return HttpResponseRedirect(reverse('project', kwargs={ 'project_id': project_id }))
 
 @login_required(login_url='login')
 def editprofile(request):
@@ -144,9 +198,63 @@ def editprofile(request):
 
     return render(request, 'project_ticket/editprofile.html', {'form':form, 'form2':form2, 'user': request.user})
 
+@login_required(login_url='login')
+def add_project(request):
+    user = request.user
+    proj = Project()
+    if request.method == 'POST':
+        form = AddProject(request.POST)
+        if form.is_valid():
+            proj.name = form.cleaned_data['name']
+            proj.description = form.cleaned_data['description']
+            proj.recent_user = user.email
+
+            client = form.cleaned_data['client']
+            proj.client = client
+            proj.save()
+
+            proj.developer = form.cleaned_data['developer']
+            proj.project_manager = form.cleaned_data['project_manager']
+            return HttpResponseRedirect(reverse('project', kwargs={ 'project_id': proj.id }))
+    else:
+        form = AddProject()
+
+    return render(request, 'project_ticket/add_project.html', { 'form': form })
+
 
 @login_required(login_url='login')
-def addticket(request):
+def edit_project(request, project_id):
+    user = request.user
+    project = get_object_or_404(Project, id=project_id)
+    if request.method == 'POST':
+        form = AddProject(request.POST)
+        if form.is_valid():
+            project.name = form.cleaned_data['name']
+            project.description = form.cleaned_data['description']
+            project.recent_user = user.email
+            client = form.cleaned_data['client']
+            project.client = client
+            project.save()
+            project.developer = form.cleaned_data['developer']
+            project.project_manager = form.cleaned_data['project_manager']
+            return HttpResponseRedirect(reverse('project', kwargs={ 'project_id':project.id }))
+    else:
+        form = AddProject(
+            initial={
+                'name': project.name,
+                'description': project.description,
+                'client': project.client,
+                'project_manager': project.project_manager.all(),
+                'developer': project.developer.all(),
+            })
+
+    context = {'form':form, 'user':request.user }
+
+    return render(request, 'project_ticket/edit_project.html', context)
+
+
+@login_required(login_url='login')
+def addticket(request, project_id):
     user = request.user
     ticket = Ticket()
     if request.method == 'POST':
@@ -155,16 +263,49 @@ def addticket(request):
             ticket.name = form.cleaned_data['name']
             ticket.description_ticket = form.cleaned_data['description']
             ticket.recent_user = user.email
-            ticket.project = form.cleaned_data['project']
+            ticket.project = Project.objects.get(pk=project_id)
             ticket.status = form.cleaned_data['status']
             ticket.save()
             ticket.developer = form.cleaned_data['developer'] # needs to be assigned after ticket.save(why?)
                                                               # ManyToManyField items can't be added to a model until after it's been saved.
-            return HttpResponseRedirect(reverse('profile'))
+
+            return HttpResponseRedirect(reverse('project', kwargs={ 'project_id':ticket.project.id }))
     else:
         form = AddTicket()
 
-    return render(request, 'project_ticket/addticket.html', {'form':form, 'user':request.user})
+    context = {'form':form, 'user':request.user, 'proj_id': project_id}
+
+    return render(request, 'project_ticket/addticket.html', context)
+
+
+@login_required(login_url='login')
+def edit_ticket(request, ticket_id):
+    user = request.user
+    ticket = get_object_or_404(Ticket, id=ticket_id)
+    if request.method == 'POST':
+        form = AddTicket(request.POST)
+        if form.is_valid():
+            ticket.name = form.cleaned_data['name']
+            ticket.description_ticket = form.cleaned_data['description']
+            ticket.recent_user = user.email
+            ticket.status = form.cleaned_data['status']
+            ticket.save()
+            ticket.developer = form.cleaned_data['developer']
+
+            return HttpResponseRedirect(reverse('project', kwargs={ 'project_id':ticket.project.id }))
+    else:
+        form = AddTicket(
+            initial={
+                'name': ticket.name,
+                'description': ticket.description_ticket,
+                'developer': ticket.developer.all(),
+                'status': ticket.status,
+            })
+
+    context = {'form':form, 'user':request.user }
+
+    return render(request, 'project_ticket/edit_ticket.html', context)
+
 
 def register(request):
     """

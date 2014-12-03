@@ -46,8 +46,10 @@ class Ticket(models.Model):
 		('Completed', 'Completed'),
 		('Back Log', 'Back Log'),
 	)
-
 	status = models.CharField(max_length=32, default='Queued', choices=ticket_statuss)
+
+	def __unicode__(self):
+		return self.name
 
 	def save(self):
 		action = ActionReport()
@@ -55,7 +57,7 @@ class Ticket(models.Model):
 		if self.pk is not None:
 			old = Ticket.objects.get(pk=self.pk)
 			if old.status.lower() != self.status.lower():
-				verb = "%s changed %s from %s to %s on " % (self.recent_user,self.name, old.status, self.status)
+				verb = "%s moved %s from %s to %s on " % (self.recent_user,self.name, old.status, self.status)
 				action.message = verb + "%s" % (datetime.now()).strftime(" %B %d, %Y at %H:%M")
 				action.save()
 			if old.name.lower() != self.name.lower() or old.description_ticket.lower() != self.description_ticket.lower():
@@ -72,7 +74,7 @@ class Ticket(models.Model):
 
 # Insert Comment Class here!
 class Comment(models.Model):
-    ticket = models.ForeignKey(Ticket)
+    ticket = models.ForeignKey(Ticket, related_name='comments')
     text = models.TextField(max_length = 1024)
     date_submitted = models.DateTimeField(default = datetime.now)
     recent_user = models.CharField(max_length = 120, default=" ")
@@ -104,8 +106,10 @@ class Comment(models.Model):
 
 
 class ActionReport(models.Model):
-    project = models.ForeignKey(Project, related_name="projects")
+    project = models.ForeignKey(Project, related_name="action_reports")
     message = models.CharField(max_length= 32, default=" ")
+    # Date created is used to order all the recent actions
+    date_created = models.DateTimeField(default = datetime.now)
 
     def save(self):
     	super(ActionReport, self).save()
